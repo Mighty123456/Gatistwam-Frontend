@@ -1,40 +1,171 @@
-import React from 'react';
-import { ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Button from '../ui/Button';
-import { Link } from 'react-router-dom';
+import { useTheme } from '../../context/ThemeContext';
+
+const services = [
+  {
+    title: 'Digital Branding',
+    description: 'Crafting compelling brand identities that resonate with your audience and drive business growth',
+    link: '/services/digital-branding'
+  },
+  {
+    title: 'Tech Solutions',
+    description: 'Innovative technology solutions that transform your business operations and drive digital success',
+    link: '/services/tech-solutions'
+  },
+  {
+    title: 'Graphics Design',
+    description: 'Creative and professional design solutions that make your brand stand out in the digital landscape',
+    link: '/services/graphic-design'
+  },
+  {
+    title: 'HR Solutions',
+    description: 'Comprehensive HR management and consulting services for organizational excellence and growth',
+    link: '/services/hr-solutions'
+  },
+  {
+    title: 'Academy',
+    description: 'Professional training and skill development programs for career advancement and success',
+    link: '/services/academy'
+  },
+  {
+    title: 'Ecommerce Support',
+    description: 'End-to-end ecommerce solutions and support for online business success and growth',
+    link: '/services/ecommerce-support'
+  },
+  {
+    title: 'Research',
+    description: 'Data-driven research and market analysis for informed business decisions and strategy',
+    link: '/services/research'
+  },
+  {
+    title: 'Management Solutions',
+    description: 'Strategic business management and consulting for sustainable growth and success',
+    link: '/services/management-solutions'
+  }
+];
 
 const HeroSection: React.FC = () => {
+  const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
+  const { theme } = useTheme();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentServiceIndex((prev) => (prev + 1) % services.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="relative min-h-screen flex items-center bg-gradient-to-r from-primary-500 to-primary-700 overflow-hidden">
-      {/* Background elements */}
+    <div className={`relative min-h-screen flex flex-col justify-center ${theme === 'dark' ? 'bg-[#0A0A0A]' : 'bg-white'} overflow-hidden`}>
+      {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 -right-24 w-96 h-96 bg-secondary-500 opacity-20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 -left-24 w-96 h-96 bg-secondary-500 opacity-20 rounded-full blur-3xl"></div>
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+            rotate: [0, 45, 0],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          className={`absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-to-br ${
+            theme === 'dark' ? 'from-[#8BD7BB]/10' : 'from-[#0E2A61]/10'
+          } to-transparent rounded-full blur-3xl opacity-50`}
+        />
+        <motion.div
+          animate={{
+            scale: [1.1, 1, 1.1],
+            rotate: [45, 0, 45],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          className={`absolute -bottom-1/2 -right-1/2 w-full h-full bg-gradient-to-tl ${
+            theme === 'dark' ? 'from-[#8BD7BB]/10' : 'from-[#0E2A61]/10'
+          } to-transparent rounded-full blur-3xl opacity-50`}
+        />
       </div>
       
       {/* Content */}
       <div className="container-custom relative z-10 pt-20 pb-20 md:pt-0 md:pb-0">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           {/* Left content */}
-          <div className="text-white">
+          <div className={theme === 'dark' ? 'text-white' : 'text-gray-900'}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
+              className="mb-16"
             >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-                Digital Marketing <span className="text-secondary-500">Solutions</span>
-              </h1>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentServiceIndex}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5 }}
+                  className="relative"
+                >
+                  {/* Service Badge */}
+                  <motion.div
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className={`inline-flex items-center gap-3 px-4 py-2 rounded-full ${
+                      theme === 'dark' ? 'bg-[#8BD7BB]/10' : 'bg-[#0E2A61]/10'
+                    } mb-8 backdrop-blur-sm border ${
+                      theme === 'dark' ? 'border-[#8BD7BB]/20' : 'border-[#0E2A61]/20'
+                    }`}
+                  >
+                    <span className={`text-sm font-medium ${
+                      theme === 'dark' ? 'text-[#8BD7BB]' : 'text-[#0E2A61]'
+                    }`}>Featured Service</span>
+                  </motion.div>
+
+                  {/* Service Title */}
+                  <motion.h1
+                    className={`text-6xl md:text-7xl lg:text-8xl font-bold mb-8 ${
+                      theme === 'dark' ? 'text-[#8BD7BB]' : 'text-[#0E2A61]'
+                    } leading-[1.1] tracking-tight`}
+                  >
+                    {services[currentServiceIndex].title}
+                  </motion.h1>
+
+                  {/* Solutions Text */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    className="flex items-center gap-4 mb-12"
+                  >
+                    <div className={`h-px w-16 bg-gradient-to-r ${
+                      theme === 'dark' ? 'from-[#8BD7BB]/20' : 'from-[#0E2A61]/20'
+                    } to-transparent`} />
+                    <span className={`text-2xl font-medium ${
+                      theme === 'dark' ? 'text-[#8BD7BB]/60' : 'text-[#0E2A61]/60'
+                    }`}>Solutions</span>
+                  </motion.div>
+                </motion.div>
+              </AnimatePresence>
             </motion.div>
             
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
+              className="mb-12"
             >
-              <p className="text-xl text-gray-200 mb-8">
-                Transform your business with our innovative digital marketing strategies and solutions.
+              <p className={`text-xl ${
+                theme === 'dark' ? 'text-white/70' : 'text-gray-700'
+              } leading-relaxed max-w-xl font-light`}>
+                {services[currentServiceIndex].description}
               </p>
             </motion.div>
             
@@ -42,21 +173,37 @@ const HeroSection: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-wrap gap-6"
             >
               <Button 
-                variant="secondary" 
-                to="/services"
+                variant="primary" 
+                to={services[currentServiceIndex].link}
                 size="lg"
+                className={`group relative overflow-hidden ${
+                  theme === 'dark' ? 'bg-[#8BD7BB] hover:bg-[#8BD7BB]/90' : 'bg-[#0E2A61] hover:bg-[#0E2A61]/90'
+                } transition-all duration-300`}
               >
-                Explore Services
+                <span className="relative z-10 flex items-center gap-2 text-white">
+                  Explore Service
+                  <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                </span>
+                <motion.div
+                  className="absolute inset-0 bg-white/10"
+                  initial={{ x: '-100%' }}
+                  whileHover={{ x: '100%' }}
+                  transition={{ duration: 0.5 }}
+                />
               </Button>
               <Button 
                 variant="outline" 
                 to="/contact"
                 size="lg"
-                className="border-white text-white hover:bg-white hover:text-primary-500"
-                icon={<ArrowRight size={20} />}
+                className={`group relative overflow-hidden ${
+                  theme === 'dark' 
+                    ? 'border-[#8BD7BB]/20 text-[#8BD7BB] hover:bg-[#8BD7BB]/5' 
+                    : 'border-[#0E2A61]/20 text-[#0E2A61] hover:bg-[#0E2A61]/5'
+                } backdrop-blur-sm`}
+                icon={<ArrowRight className="transition-transform group-hover:translate-x-1" />}
                 iconPosition="right"
               >
                 Get Started
@@ -69,32 +216,68 @@ const HeroSection: React.FC = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="hidden md:flex justify-center"
+            className="hidden lg:block relative"
           >
-            <img 
-              src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
-              alt="Digital Marketing Team" 
-              className="rounded-xl max-w-full object-cover shadow-2xl"
-              style={{ maxHeight: '70vh' }}
-            />
+            <div className="relative">
+              <motion.div
+                key={currentServiceIndex}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.05 }}
+                transition={{ duration: 0.5 }}
+                className="relative"
+              >
+                {/* Main Image Container */}
+                <div className={`w-full aspect-[4/3] rounded-3xl overflow-hidden ${
+                  theme === 'dark' ? 'bg-[#8BD7BB]/20' : 'bg-[#0E2A61]/20'
+                } p-[2px] shadow-2xl`}>
+                  <div className={`w-full h-full ${
+                    theme === 'dark' ? 'bg-[#0A0A0A]' : 'bg-white'
+                  } rounded-[22px] overflow-hidden backdrop-blur-sm`}>
+                    <img 
+                      src={`https://source.unsplash.com/random/1200x900?${services[currentServiceIndex].title.toLowerCase().replace(' ', ',')},business,technology,modern,professional`}
+                      alt={services[currentServiceIndex].title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className={`absolute inset-0 bg-gradient-to-t ${
+                      theme === 'dark' ? 'from-[#8BD7BB]/10' : 'from-[#0E2A61]/10'
+                    }`} />
+                  </div>
+                </div>
+
+                {/* Decorative Elements */}
+                <div className={`absolute -top-6 -right-6 w-32 h-32 ${
+                  theme === 'dark' ? 'bg-[#8BD7BB]/10' : 'bg-[#0E2A61]/10'
+                } rounded-full blur-2xl opacity-50`} />
+                <div className={`absolute -bottom-6 -left-6 w-40 h-40 ${
+                  theme === 'dark' ? 'bg-[#8BD7BB]/10' : 'bg-[#0E2A61]/10'
+                } rounded-full blur-2xl opacity-50`} />
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>
       
       {/* Scroll indicator */}
       <motion.div 
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-white"
+        className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center ${
+          theme === 'dark' ? 'text-[#8BD7BB]/40' : 'text-[#0E2A61]/40'
+        }`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 1 }}
       >
-        <span className="text-sm mb-2">Scroll Down</span>
+        <span className="text-sm mb-2 font-medium tracking-wider">SCROLL DOWN</span>
         <motion.div
-          animate={{ y: [0, 10, 0] }}
+          animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
         >
-          <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
-            <div className="w-1 h-2 bg-white rounded-full mt-2"></div>
+          <div className={`w-6 h-10 border rounded-full flex justify-center ${
+            theme === 'dark' ? 'border-[#8BD7BB]/20' : 'border-[#0E2A61]/20'
+          }`}>
+            <div className={`w-1 h-2 rounded-full mt-2 ${
+              theme === 'dark' ? 'bg-[#8BD7BB]/40' : 'bg-[#0E2A61]/40'
+            }`}></div>
           </div>
         </motion.div>
       </motion.div>

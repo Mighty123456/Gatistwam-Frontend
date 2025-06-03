@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
+import { X, Facebook, Twitter, Instagram, Linkedin, Youtube, MapPin, Phone, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../context/ThemeContext';
 
@@ -66,9 +66,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                       Contact Information
                     </h3>
                     <div className="space-y-2 text-gray-600 dark:text-gray-400">
-                      <p>Email: info@gatistwam.com</p>
-                      <p>Phone: +1 (555) 123-4567</p>
-                      <p>Address: 123 Business Street, City, Country</p>
+                      <p>Email: advertmarketing1988@gmail.com</p>
+                      <p>Phone: +91 9274524365</p>
+                      <p>Address: Shrimat Arcade, 01, Anand - Sojitra Rd, Nand Tanuj Society, Karamsad, Anand, Gujarat 388121</p>
                     </div>
                   </div>
 

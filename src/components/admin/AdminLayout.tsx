@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { 
-  LayoutDashboard, 
-  Settings, 
   FileText, 
   Menu, 
   X,
   Mail,
-  LogOut
+  LogOut,
+  FileEdit,
+  Briefcase,
+  BookOpen
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -39,10 +40,9 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   };
 
   const navigation = [
-    { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-    { name: 'Projects', href: '/admin/projects', icon: FileText },
     { name: 'Contacts', href: '/admin/contacts', icon: Mail },
-    { name: 'Settings', href: '/admin/settings', icon: Settings },
+    { name: 'Portfolio', href: '/admin/portfolio', icon: Briefcase },
+    { name: 'Blog', href: '/admin/blog', icon: BookOpen },
   ];
 
   return (

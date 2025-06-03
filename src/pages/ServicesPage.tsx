@@ -38,25 +38,27 @@ const serviceCategories = [
     ],
   },
   {
-    category: 'Research',
-    slug: 'research',
+    category: 'Graphic Design',
+    slug: 'graphic-design',
     services: [
-      'Market Research & Consumer Insights',
-      'Business Feasibility & Industry Analysis',
-      'Competitor & SWOT Analysis',
-      'Data Analysis & Visualization',
-      'Custom Research Projects',
+      'Logo & Brand Identity Design',
+      'Social Media Post Design',
+      'Business Cards & Stationery',
+      'Brochure & Flyer Design',
+      'Packaging & Label Design',
+      'Motion Graphics',
     ],
   },
   {
-    category: 'Management Solutions',
-    slug: 'management-solutions',
+    category: 'HR Solutions',
+    slug: 'hr-solutions',
     services: [
-      'Business Strategy & Planning',
-      'Branding & Marketing Consultancy',
-      'Technology & Digital Transformation',
-      'Startup & SME Support Services',
-      'Process Improvement & Operations Management',
+      'Entrepreneurship Development',
+      'Business Planning & Strategy',
+      'Financial Literacy & Accounting Basics',
+      'HR Management & Recruitment Training',
+      'Business Communication Skills',
+      'Project Management (Agile, Scrum)',
     ],
   },
   {
@@ -82,27 +84,25 @@ const serviceCategories = [
     ],
   },
   {
-    category: 'HR Solutions',
-    slug: 'hr-solutions',
+    category: 'Research',
+    slug: 'research',
     services: [
-      'Entrepreneurship Development',
-      'Business Planning & Strategy',
-      'Financial Literacy & Accounting Basics',
-      'HR Management & Recruitment Training',
-      'Business Communication Skills',
-      'Project Management (Agile, Scrum)',
+      'Market Research & Consumer Insights',
+      'Business Feasibility & Industry Analysis',
+      'Competitor & SWOT Analysis',
+      'Data Analysis & Visualization',
+      'Custom Research Projects',
     ],
   },
   {
-    category: 'Graphic Design',
-    slug: 'graphic-design',
+    category: 'Management Solutions',
+    slug: 'management-solutions',
     services: [
-      'Logo & Brand Identity Design',
-      'Social Media Post Design',
-      'Business Cards & Stationery',
-      'Brochure & Flyer Design',
-      'Packaging & Label Design',
-      'Motion Graphics',
+      'Business Strategy & Planning',
+      'Branding & Marketing Consultancy',
+      'Technology & Digital Transformation',
+      'Startup & SME Support Services',
+      'Process Improvement & Operations Management',
     ],
   },
 ];
@@ -110,12 +110,12 @@ const serviceCategories = [
 const categoryIcons = [
   <FaChartLine className="w-12 h-12" />,
   <FaLaptopCode className="w-12 h-12" />,
-  <FaSearch className="w-12 h-12" />,
-  <FaChartLine className="w-12 h-12" />,
+  <FaPalette className="w-12 h-12" />,
+  <FaUsers className="w-12 h-12" />,
   <FaGraduationCap className="w-12 h-12" />,
   <FaShoppingCart className="w-12 h-12" />,
-  <FaUsers className="w-12 h-12" />,
-  <FaPalette className="w-12 h-12" />,
+  <FaSearch className="w-12 h-12" />,
+  <FaHandshake className="w-12 h-12" />,
 ];
 
 const ServicesPage: React.FC = () => {
@@ -125,7 +125,11 @@ const ServicesPage: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-800 dark:text-gray-200 py-20">
       <div className="container-custom mx-auto px-4">
         <div className="text-center mb-16">
-          <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">
+          <h1 className={`text-6xl font-bold mb-6 px-4 py-2 ${
+            theme === 'light' 
+              ? 'text-primary-500' 
+              : 'text-secondary-500'
+          }`}>
             Our Services
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">

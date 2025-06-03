@@ -9,6 +9,7 @@ import ContactPage from './pages/ContactPage';
 import PortfolioPage from './pages/PortfolioPage';
 import BlogPage from './pages/BlogPage';
 import ServicesPage from './pages/ServicesPage';
+import ThankYouPage from './pages/ThankYouPage';
 import ManagementSolutions from './pages/services/ManagementSolutions';
 import GraphicDesign from './pages/services/GraphicDesign';
 import HRSolutions from './pages/services/HRSolutions';
@@ -24,13 +25,15 @@ import UIUXDesignPage from './pages/services/UIUXDesignPage';
 import GoogleAdsPPCPage from './pages/services/GoogleAdsPPCPage';
 import LeadsGenerationPage from './pages/services/LeadsGenerationPage';
 import InfluencerMarketingPage from './pages/services/InfluencerMarketingPage';
+import BlogPostPage from './pages/BlogPostPage';
 
 // Admin Pages
-import AdminDashboard from './pages/admin/Dashboard';
 import AdminProjects from './pages/admin/Projects';
-import AdminSettings from './pages/admin/Settings';
 import AdminLogin from './pages/admin/Login';
 import ContactManagement from './pages/admin/ContactManagement';
+import ContentManagement from './pages/admin/ContentManagement';
+import PortfolioManagement from './pages/admin/PortfolioManagement';
+import BlogManagement from './pages/admin/BlogManagement';
 import ProtectedRoute from './components/admin/ProtectedRoute';
 
 const App: React.FC = () => {
@@ -44,7 +47,7 @@ const App: React.FC = () => {
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin" element={
               <ProtectedRoute>
-                <AdminDashboard />
+                <AdminProjects />
               </ProtectedRoute>
             } />
             <Route path="/admin/projects" element={
@@ -52,14 +55,24 @@ const App: React.FC = () => {
                 <AdminProjects />
               </ProtectedRoute>
             } />
-            <Route path="/admin/settings" element={
-              <ProtectedRoute>
-                <AdminSettings />
-              </ProtectedRoute>
-            } />
             <Route path="/admin/contacts" element={
               <ProtectedRoute>
                 <ContactManagement />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/content" element={
+              <ProtectedRoute>
+                <ContentManagement />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/portfolio" element={
+              <ProtectedRoute>
+                <PortfolioManagement />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/blog" element={
+              <ProtectedRoute>
+                <BlogManagement />
               </ProtectedRoute>
             } />
 
@@ -67,8 +80,10 @@ const App: React.FC = () => {
             <Route path="/" element={<Layout><HomePage /></Layout>} />
             <Route path="/about" element={<Layout><AboutPage /></Layout>} />
             <Route path="/contact" element={<Layout><ContactPage /></Layout>} />
+            <Route path="/thank-you" element={<Layout><ThankYouPage /></Layout>} />
             <Route path="/portfolio" element={<Layout><PortfolioPage /></Layout>} />
             <Route path="/blog" element={<Layout><BlogPage /></Layout>} />
+            <Route path="/blog/:id" element={<Layout><BlogPostPage /></Layout>} />
             <Route path="/services" element={<Layout><ServicesPage /></Layout>} />
             <Route path="/services/management-solutions" element={<Layout><ManagementSolutions /></Layout>} />
             <Route path="/services/graphic-design" element={<Layout><GraphicDesign /></Layout>} />

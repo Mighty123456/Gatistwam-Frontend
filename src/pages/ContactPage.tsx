@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import PageHeader from '../components/layout/PageHeader';
 import AnimatedElement from '../components/ui/AnimatedElement';
 import Button from '../components/ui/Button';
 
 const ContactPage: React.FC = () => {
+  const navigate = useNavigate();
+  
   // Update document title
   useEffect(() => {
     document.title = 'Contact Us - Gatistwam';
@@ -31,9 +34,6 @@ const ContactPage: React.FC = () => {
     success: false,
     message: '',
   });
-
-  // Add state for thank you modal
-  const [showThankYouModal, setShowThankYouModal] = useState(false);
 
   // Handle input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -61,16 +61,7 @@ const ContactPage: React.FC = () => {
         throw new Error(data.message || 'Something went wrong');
       }
 
-      setFormStatus({
-        submitted: true,
-        success: true,
-        message: data.message || 'Your message has been sent! We will get back to you soon.',
-      });
-      
-      // Show thank you modal
-      setShowThankYouModal(true);
-      
-      // Reset form after submission
+      // Reset form after successful submission
       setFormData({
         name: '',
         email: '',
@@ -78,6 +69,9 @@ const ContactPage: React.FC = () => {
         subject: '',
         message: '',
       });
+
+      // Redirect to thank you page
+      navigate('/thank-you');
     } catch (error) {
       setFormStatus({
         submitted: true,
@@ -87,15 +81,6 @@ const ContactPage: React.FC = () => {
     } finally {
       setIsSubmitting(false);
     }
-    
-    // Reset form status after delay
-    setTimeout(() => {
-      setFormStatus({
-        submitted: false,
-        success: false,
-        message: '',
-      });
-    }, 5000);
   };
 
   return (
@@ -128,7 +113,25 @@ const ContactPage: React.FC = () => {
                       Our Location
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400">
-                      123 Marketing Street, Digital City, 10001
+                      Shrimat Arcade, 01, Anand - Sojitra Rd,<br />
+                      Nand Tanuj Society, Karamsad,<br />
+                      Anand, Gujarat 388121
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="bg-primary-100 dark:bg-primary-900 p-3 rounded-full mr-4">
+                    <Phone className="text-primary-500 dark:text-secondary-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-primary-600 dark:text-white mb-1">
+                      Phone Number
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      <a href="tel:+919274524365" className="hover:text-secondary-500 transition-colors">
+                        +91 9274524365
+                      </a>
                     </p>
                   </div>
                 </div>
@@ -142,24 +145,8 @@ const ContactPage: React.FC = () => {
                       Email Us
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400">
-                      <a href="mailto:info@gatistwam.com" className="hover:text-secondary-500 transition-colors">
-                        info@gatistwam.com
-                      </a>
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start">
-                  <div className="bg-primary-100 dark:bg-primary-900 p-3 rounded-full mr-4">
-                    <Phone className="text-primary-500 dark:text-secondary-400" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-primary-600 dark:text-white mb-1">
-                      Call Us
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      <a href="tel:+11234567890" className="hover:text-secondary-500 transition-colors">
-                        +1 (123) 456-7890
+                      <a href="mailto:advertmarketing1988@gmail.com" className="hover:text-secondary-500 transition-colors">
+                        advertmarketing1988@gmail.com
                       </a>
                     </p>
                   </div>
@@ -189,13 +176,11 @@ const ContactPage: React.FC = () => {
                 </h2>
                 
                 {/* Form status message */}
-                {formStatus.submitted && (
+                {formStatus.submitted && !formStatus.success && (
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className={`p-4 mb-6 rounded-lg ${
-                      formStatus.success ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                    }`}
+                    className="p-4 mb-6 rounded-lg bg-red-100 text-red-800"
                   >
                     {formStatus.message}
                   </motion.div>
@@ -310,35 +295,6 @@ const ContactPage: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Thank You Modal */}
-      {showThankYouModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            className="bg-white dark:bg-gray-800 rounded-lg p-8 max-w-md w-full text-center"
-          >
-            <div className="flex justify-center mb-6">
-              <CheckCircle className="h-16 w-16 text-green-500" />
-            </div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Thank You for Contacting Us!
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-6">
-              We have received your message and will get back to you as soon as possible.
-            </p>
-            <Button
-              onClick={() => setShowThankYouModal(false)}
-              variant="primary"
-              className="w-full"
-            >
-              Close
-            </Button>
-          </motion.div>
-        </div>
-      )}
     </>
   );
 };

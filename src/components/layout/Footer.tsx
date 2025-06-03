@@ -125,16 +125,20 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-semibold mb-4" style={{ color: theme === 'light' ? '#111827' : '#fff' }}>Contact Us</h3>
             <ul className="space-y-3 mb-8">
               <li className="flex items-start">
-                <MapPin size={20} className="text-secondary-500 mt-1 mr-3 flex-shrink-0" />
-                <span className={theme === 'light' ? 'text-gray-600' : 'text-gray-400'}>123 Marketing Street, Digital City, 10001</span>
+                <MapPin size={20} className={`mt-1 mr-3 flex-shrink-0 ${theme === 'light' ? 'text-primary-500' : 'text-secondary-500'}`} />
+                <span className={theme === 'light' ? 'text-gray-600' : 'text-gray-400'}>
+                  Shrimat Arcade, 01, Anand - Sojitra Rd,<br />
+                  Nand Tanuj Society, Karamsad,<br />
+                  Anand, Gujarat 388121
+                </span>
               </li>
               <li className="flex items-center">
-                <Phone size={20} className="text-secondary-500 mr-3 flex-shrink-0" />
-                <a href="tel:+11234567890" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}>+1 (123) 456-7890</a>
+                <Phone size={20} className={`mr-3 flex-shrink-0 ${theme === 'light' ? 'text-primary-500' : 'text-secondary-500'}`} />
+                <a href="tel:+919274524365" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}>+91 9274524365</a>
               </li>
               <li className="flex items-center">
-                <Mail size={20} className="text-secondary-500 mr-3 flex-shrink-0" />
-                <a href="mailto:info@gatistwam.com" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}>info@gatistwam.com</a>
+                <Mail size={20} className={`mr-3 flex-shrink-0 ${theme === 'light' ? 'text-primary-500' : 'text-secondary-500'}`} />
+                <a href="mailto:advertmarketing1988@gmail.com" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}>advertmarketing1988@gmail.com</a>
               </li>
             </ul>
 
@@ -163,7 +167,11 @@ const Footer: React.FC = () => {
                   />
                   <button
                     type="submit"
-                    className="w-full px-3 py-2 text-sm rounded-lg bg-secondary-500 hover:bg-secondary-600 text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className={`w-full px-3 py-2 text-sm rounded-lg text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 ${
+                      theme === 'light' 
+                        ? 'bg-primary-500 hover:bg-primary-600' 
+                        : 'bg-secondary-500 hover:bg-secondary-600'
+                    }`}
                     disabled={isSubscribing}
                   >
                     {isSubscribing ? (

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTheme } from '../../context/ThemeContext';
 
 const caseStudies = [
   {
@@ -23,6 +24,8 @@ const caseStudies = [
 ];
 
 const CaseStudiesSection: React.FC = () => {
+  const { theme } = useTheme();
+
   return (
     <section className="py-20 bg-gray-50 dark:bg-gray-900">
       <div className="container-custom">
@@ -34,7 +37,7 @@ const CaseStudiesSection: React.FC = () => {
             viewport={{ once: true }}
             className="text-3xl md:text-4xl font-bold mb-4"
           >
-            New <span className="text-[#8BD7BB]">Case Studies</span>
+            New <span className="text-primary-500 dark:text-secondary-500">Case Studies</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -64,19 +67,31 @@ const CaseStudiesSection: React.FC = () => {
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute top-4 left-4">
-                  <span className="bg-[#8BD7BB] text-white px-3 py-1 rounded-full text-sm">
+                  <span className={`${
+                    theme === 'light' 
+                      ? 'bg-primary-500' 
+                      : 'bg-secondary-500'
+                  } text-white px-3 py-1 rounded-full text-sm`}>
                     {study.category}
                   </span>
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-bold mb-2 text-[#8BD7BB]">{study.title}</h3>
+                <h3 className={`text-xl font-bold mb-2 ${
+                  theme === 'light' 
+                    ? 'text-primary-500' 
+                    : 'text-secondary-500'
+                }`}>{study.title}</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
                   {study.description}
                 </p>
                 <a
                   href={`/case-studies/${study.title.toLowerCase().replace(/\s+/g, '-')}`}
-                  className="text-[#8BD7BB] hover:text-[#7ac5a9] font-semibold inline-flex items-center transition-colors duration-200"
+                  className={`${
+                    theme === 'light' 
+                      ? 'text-primary-500 hover:text-primary-600' 
+                      : 'text-secondary-500 hover:text-secondary-600'
+                  } font-semibold inline-flex items-center transition-colors duration-200`}
                 >
                   Read Case Study
                   <svg
@@ -107,7 +122,11 @@ const CaseStudiesSection: React.FC = () => {
         >
           <a
             href="/case-studies"
-            className="inline-flex items-center px-8 py-3 text-lg font-semibold rounded-lg bg-[#8BD7BB] text-white hover:bg-[#7ac5a9] transition-colors duration-200"
+            className={`inline-flex items-center px-8 py-3 text-lg font-semibold rounded-lg text-white transition-colors duration-200 ${
+              theme === 'light' 
+                ? 'bg-primary-500 hover:bg-primary-600' 
+                : 'bg-secondary-500 hover:bg-secondary-600'
+            }`}
           >
             View All Case Studies
           </a>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { IconType } from 'react-icons';
+import { useTheme } from '../../context/ThemeContext';
 
 interface Service {
   name: string;
@@ -30,6 +31,8 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
   features,
   IconComponent
 }) => {
+  const { theme } = useTheme();
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-800 dark:text-gray-200">
       <div className="container-custom mx-auto px-4 py-20">
@@ -39,7 +42,11 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-6xl font-bold mb-6 bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent"
+            className={`text-6xl font-bold mb-6 px-4 py-2 ${
+              theme === 'light' 
+                ? 'text-primary-500' 
+                : 'text-secondary-500'
+            }`}
           >
             {title}
           </motion.h1>

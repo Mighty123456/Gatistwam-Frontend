@@ -1,122 +1,97 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Filter, X, ExternalLink } from 'lucide-react';
+import { X } from 'lucide-react';
 import PageHeader from '../components/layout/PageHeader';
+import axios from 'axios';
 
-const caseStudies = [
-  {
-    id: 1,
-    title: 'E-commerce Growth Strategy',
-    category: 'Digital Marketing',
-    image: 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Helped an e-commerce store achieve 200% revenue growth in 6 months through comprehensive digital marketing strategies.',
-    challenges: [
-      'Low conversion rates',
-      'Limited brand awareness',
-      'Ineffective social media presence'
-    ],
-    solutions: [
-      'Implemented targeted PPC campaigns',
-      'Developed engaging social media content',
-      'Optimized website for better user experience'
-    ],
-    results: [
-      '200% increase in revenue',
-      '150% growth in social media followers',
-      '300% improvement in conversion rate'
-    ],
-    client: 'Fashion Retailer',
-    duration: '6 months'
-  },
-  {
-    id: 2,
-    title: 'Brand Awareness Campaign',
-    category: 'Social Media',
-    image: 'https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Increased brand awareness by 300% through targeted social media campaigns and influencer partnerships.',
-    challenges: [
-      'Low brand recognition',
-      'Limited social media engagement',
-      'Inconsistent brand messaging'
-    ],
-    solutions: [
-      'Created viral social media campaigns',
-      'Partnered with industry influencers',
-      'Developed consistent brand guidelines'
-    ],
-    results: [
-      '300% increase in brand awareness',
-      '500% growth in social media engagement',
-      '200% increase in website traffic'
-    ],
-    client: 'Tech Startup',
-    duration: '4 months'
-  },
-  {
-    id: 3,
-    title: 'SEO Success Story',
-    category: 'SEO',
-    image: 'https://images.pexels.com/photos/3183155/pexels-photo-3183155.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Improved organic traffic by 150% through comprehensive SEO strategy and content optimization.',
-    challenges: [
-      'Poor search engine rankings',
-      'Low organic traffic',
-      'Outdated content'
-    ],
-    solutions: [
-      'Conducted comprehensive SEO audit',
-      'Created SEO-optimized content',
-      'Improved website structure'
-    ],
-    results: [
-      '150% increase in organic traffic',
-      'Top 10 rankings for key keywords',
-      '200% growth in qualified leads'
-    ],
-    client: 'B2B Service Provider',
-    duration: '8 months'
-  },
-  {
-    id: 4,
-    title: 'PPC Campaign Optimization',
-    category: 'PPC',
-    image: 'https://images.pexels.com/photos/3183158/pexels-photo-3183158.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Optimized ad spend and increased conversion rates through strategic PPC campaign management.',
-    challenges: [
-      'High cost per acquisition',
-      'Low conversion rates',
-      'Inefficient ad spend'
-    ],
-    solutions: [
-      'Implemented advanced targeting',
-      'Optimized landing pages',
-      'Refined ad copy and creative'
-    ],
-    results: [
-      '50% reduction in cost per acquisition',
-      '200% increase in conversion rate',
-      '300% ROI on ad spend'
-    ],
-    client: 'E-commerce Platform',
-    duration: '3 months'
-  }
-];
+interface PortfolioItem {
+  _id: string;
+  title: string;
+  description: string;
+  category: string;
+  imageUrl: string;
+  client: string;
+  completionDate: string;
+  technologies: string[];
+  status: 'published' | 'draft';
+  liveUrl?: string;
+  githubUrl?: string;
+}
 
-const categories = ['All', ...Array.from(new Set(caseStudies.map(study => study.category)))];
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
 
 const PortfolioPage: React.FC = () => {
+  const [projects, setProjects] = useState<PortfolioItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [selectedProject, setSelectedProject] = useState<typeof caseStudies[0] | null>(null);
+  const [selectedProject, setSelectedProject] = useState<PortfolioItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        console.log('Fetching projects with API_BASE_URL:', API_BASE_URL);
+        const response = await axios.get('/api/portfolio/status/published');
+        console.log('Received projects:', response.data);
+        setProjects(response.data);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching portfolio items:', err);
+        setError('Failed to load portfolio items');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
+  const categories = ['All', ...Array.from(new Set(projects.map(project => project.category)))];
 
   const filteredProjects = selectedCategory === 'All' 
-    ? caseStudies 
-    : caseStudies.filter(project => project.category === selectedCategory);
+    ? projects 
+    : projects.filter(project => project.category === selectedCategory);
 
-  const handleProjectClick = (project: typeof caseStudies[0]) => {
+  const handleProjectClick = (project: PortfolioItem) => {
     setSelectedProject(project);
     setIsModalOpen(true);
   };
+
+  const getImageUrl = (imageUrl: string) => {
+    console.log('Original imageUrl:', imageUrl);
+    console.log('API_BASE_URL:', API_BASE_URL);
+    
+    if (!imageUrl) return '';
+    if (imageUrl.startsWith('http')) return imageUrl;
+    if (imageUrl.startsWith('/uploads/')) {
+      const cleanPath = imageUrl.startsWith('/') ? imageUrl : `/${imageUrl}`;
+      const finalUrl = `${API_BASE_URL}${cleanPath}`;
+      console.log('Constructed URL:', finalUrl);
+      return finalUrl;
+    }
+    return imageUrl;
+  };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        <div className="flex justify-center items-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        <div className="text-center text-red-500">
+          {error}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -156,40 +131,33 @@ const PortfolioPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {filteredProjects.map((project, index) => (
               <motion.div
-                key={project.id}
+                key={project._id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
                 onClick={() => handleProjectClick(project)}
               >
-                <div className="relative h-64">
+                <div className="relative aspect-[4/3] w-full">
                   <img
-                    src={project.image}
+                    src={getImageUrl(project.imageUrl)}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTUwIiBoZWlnaHQ9IjE1MCIgZmlsbD0iI2YzZjRmNiIvPjx0ZXh0IHg9Ijc1IiB5PSI3NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+SW1hZ2UgRXJyb3I8L3RleHQ+PC9zdmc+';
+                      console.error('Failed to load image:', project.imageUrl);
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-primary-500 dark:bg-secondary-500 text-white px-3 py-1 rounded-full text-sm">
-                      {project.category}
-                    </span>
-                  </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2 text-primary-500 dark:text-secondary-500">{project.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
+                  <h3 className="text-xl font-bold mb-2 text-primary-500 dark:text-secondary-500">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 line-clamp-3">
                     {project.description}
                   </p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                      Duration: {project.duration}
-                    </span>
-                    <button className="text-primary-500 dark:text-secondary-500 hover:text-primary-600 dark:hover:text-secondary-400 font-semibold inline-flex items-center transition-colors duration-200">
-                      View Details
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </button>
-                  </div>
                 </div>
               </motion.div>
             ))}
@@ -216,7 +184,7 @@ const PortfolioPage: React.FC = () => {
               >
                 <div className="sticky top-0 z-10 bg-white dark:bg-gray-800 px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
                   <h2 className="text-xl font-bold text-primary-500 dark:text-secondary-500">
-                    Project Details
+                    {selectedProject.title}
                   </h2>
                   <button
                     onClick={() => setIsModalOpen(false)}
@@ -226,74 +194,23 @@ const PortfolioPage: React.FC = () => {
                     <span>Close</span>
                   </button>
                 </div>
-                <div className="relative h-64 md:h-96">
-                  <img
-                    src={selectedProject.image}
-                    alt={selectedProject.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <span className="bg-primary-500 dark:bg-secondary-500 text-white px-3 py-1 rounded-full text-sm">
-                      {selectedProject.category}
-                    </span>
-                  </div>
-                </div>
                 <div className="p-6 md:p-8">
-                  <h2 className="text-2xl md:text-3xl font-bold mb-4 text-primary-500 dark:text-secondary-500">
-                    {selectedProject.title}
-                  </h2>
-                  <p className="text-gray-600 dark:text-gray-300 mb-6">
-                    {selectedProject.description}
-                  </p>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div>
-                      <h3 className="font-semibold mb-2 text-gray-900 dark:text-white">Client</h3>
-                      <p className="text-gray-600 dark:text-gray-300">{selectedProject.client}</p>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-2 text-gray-900 dark:text-white">Duration</h3>
-                      <p className="text-gray-600 dark:text-gray-300">{selectedProject.duration}</p>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-2 text-gray-900 dark:text-white">Category</h3>
-                      <p className="text-gray-600 dark:text-gray-300">{selectedProject.category}</p>
-                    </div>
+                  <div className="relative aspect-[16/9] w-full mb-6">
+                    <img
+                      src={getImageUrl(selectedProject.imageUrl)}
+                      alt={selectedProject.title}
+                      className="absolute inset-0 w-full h-full object-contain bg-gray-100 dark:bg-gray-900 rounded-lg"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTUwIiBoZWlnaHQ9IjE1MCIgZmlsbD0iI2YzZjRmNiIvPjx0ZXh0IHg9Ijc1IiB5PSI3NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+SW1hZ2UgRXJyb3I8L3RleHQ+PC9zdmc+';
+                        console.error('Failed to load image:', selectedProject.imageUrl);
+                      }}
+                    />
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div>
-                      <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">Challenges</h3>
-                      <ul className="space-y-2">
-                        {selectedProject.challenges.map((challenge, index) => (
-                          <li key={index} className="flex items-start text-gray-600 dark:text-gray-300">
-                            <span className="w-2 h-2 bg-primary-500 dark:bg-secondary-500 rounded-full mt-2 mr-2" />
-                            {challenge}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">Solutions</h3>
-                      <ul className="space-y-2">
-                        {selectedProject.solutions.map((solution, index) => (
-                          <li key={index} className="flex items-start text-gray-600 dark:text-gray-300">
-                            <span className="w-2 h-2 bg-primary-500 dark:bg-secondary-500 rounded-full mt-2 mr-2" />
-                            {solution}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">Results</h3>
-                      <ul className="space-y-2">
-                        {selectedProject.results.map((result, index) => (
-                          <li key={index} className="flex items-start text-gray-600 dark:text-gray-300">
-                            <span className="w-2 h-2 bg-primary-500 dark:bg-secondary-500 rounded-full mt-2 mr-2" />
-                            {result}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                  <div className="prose dark:prose-invert max-w-none">
+                    <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
+                      {selectedProject.description}
+                    </p>
                   </div>
                 </div>
               </motion.div>

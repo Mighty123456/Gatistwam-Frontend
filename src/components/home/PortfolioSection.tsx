@@ -1,53 +1,79 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 import AnimatedElement from '../ui/AnimatedElement';
 import Button from '../ui/Button';
+import axios from 'axios';
 
-// Portfolio data
-const projects = [
-  {
-    id: 1,
-    title: 'E-commerce Growth Strategy',
-    category: 'Social Media',
-    description: 'Increased online sales by 200% through targeted social media campaigns and influencer partnerships.',
-    image: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-  },
-  {
-    id: 2,
-    title: 'Brand Awareness Campaign',
-    category: 'Content Marketing',
-    description: 'Created engaging content that increased brand awareness and audience engagement for a tech startup.',
-    image: 'https://images.pexels.com/photos/5673488/pexels-photo-5673488.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-  },
-  {
-    id: 3,
-    title: 'SEO Optimization Project',
-    category: 'SEO',
-    description: 'Improved search rankings and organic traffic through comprehensive SEO strategy implementation.',
-    image: 'https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-  },
-  {
-    id: 4,
-    title: 'PPC Advertising Campaign',
-    category: 'PPC',
-    description: 'Optimized ad spend and increased conversion rates through strategic PPC campaign management.',
-    image: 'https://images.pexels.com/photos/905163/pexels-photo-905163.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-  },
-];
+interface PortfolioItem {
+  _id: string;
+  title: string;
+  description: string;
+  category: string;
+  imageUrl: string;
+  client: string;
+  completionDate: string;
+  technologies: string[];
+  status: 'published' | 'draft';
+  liveUrl?: string;
+  githubUrl?: string;
+}
 
-// Categories
-const categories = [
-  'All',
-  ...Array.from(new Set(projects.map(project => project.category))),
-];
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
 
 const PortfolioSection: React.FC = () => {
+  const [projects, setProjects] = useState<PortfolioItem[]>([]);
   const [activeCategory, setActiveCategory] = useState('All');
-  
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await axios.get('/api/portfolio/status/published');
+        setProjects(response.data);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching portfolio items:', err);
+        setError('Failed to load portfolio items');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
+  // Get unique categories from projects
+  const categories = ['All', ...Array.from(new Set(projects.map(project => project.category)))];
+
   const filteredProjects = activeCategory === 'All' 
     ? projects 
     : projects.filter(project => project.category === activeCategory);
+
+  if (isLoading) {
+    return (
+      <section id="portfolio" className="section bg-white dark:bg-gray-900">
+        <div className="container-custom">
+          <div className="flex justify-center items-center h-64">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section id="portfolio" className="section bg-white dark:bg-gray-900">
+        <div className="container-custom">
+          <div className="text-center text-red-500">
+            {error}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="portfolio" className="section bg-white dark:bg-gray-900">
@@ -77,58 +103,33 @@ const PortfolioSection: React.FC = () => {
         </div>
         
         {/* Projects grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project, index) => (
-            <AnimatedElement key={project.id} delay={index * 100}>
-              <motion.div 
-                className="card group overflow-hidden"
-                whileHover={{ y: -10 }}
-                transition={{ duration: 0.3 }}
-              >
-                {/* Project image with overlay */}
-                <div className="relative overflow-hidden h-64">
-                  <img 
-                    src={project.image} 
+            <AnimatedElement key={project._id}>
+              <div className="group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                <div className="relative aspect-[4/3] w-full">
+                  <img
+                    src={project.imageUrl.startsWith('/uploads/') ? `${API_BASE_URL}${project.imageUrl}` : project.imageUrl}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTUwIiBoZWlnaHQ9IjE1MCIgZmlsbD0iI2YzZjRmNiIvPjx0ZXh0IHg9Ijc1IiB5PSI3NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+SW1hZ2UgRXJyb3I8L3RleHQ+PC9zdmc+';
+                    }}
                   />
-                  <div className="absolute inset-0 bg-primary-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <Button 
-                      variant="secondary"
-                      to={`/portfolio/${project.id}`}
-                      icon={<ExternalLink size={18} />}
-                    >
-                      View Project
-                    </Button>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-                
-                {/* Project info */}
                 <div className="p-6">
-                  <div className="mb-2">
-                    <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-secondary-100 dark:bg-secondary-900 text-secondary-800 dark:text-secondary-300">
-                      {project.category}
-                    </span>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2 text-primary-600 dark:text-white">
+                  <h3 className="text-xl font-bold mb-2 text-primary-500 dark:text-secondary-500">
                     {project.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
+                  <p className="text-gray-600 dark:text-gray-300 line-clamp-3">
                     {project.description}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             </AnimatedElement>
           ))}
-        </div>
-        
-        <div className="text-center mt-12">
-          <Button 
-            variant="primary" 
-            to="/portfolio"
-          >
-            View All Projects
-          </Button>
         </div>
       </div>
     </section>

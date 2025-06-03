@@ -1,139 +1,283 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Users, Zap, Target, TrendingUp } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 import PageHeader from '../components/layout/PageHeader';
 import AnimatedElement from '../components/ui/AnimatedElement';
-import StatsSection from '../components/home/StatsSection';
+import { 
+  Rocket, 
+  Brain, 
+  Globe, 
+  Code, 
+  Palette, 
+  Users, 
+  GraduationCap, 
+  Heart,
+  ArrowRight,
+  Sparkles
+} from 'lucide-react';
 
 const AboutPage: React.FC = () => {
-  // Update document title
+  const { theme } = useTheme();
+
   useEffect(() => {
     document.title = 'About Us - Gatistwam';
   }, []);
 
-  // Values data
-  const values = [
+  const verticals = [
     {
-      id: 1,
-      icon: <Users className="w-12 h-12 text-secondary-500" />,
-      title: 'Client Focus',
-      description: 'We put our clients first, understanding their unique needs and delivering solutions that exceed expectations.',
+      icon: <Globe className="w-8 h-8" />,
+      title: 'Gatistwam Digital',
+      description: 'Digital Marketing, Branding, Online Ads, SEO',
+      color: 'from-blue-500 to-cyan-500'
     },
     {
-      id: 2,
-      icon: <Zap className="w-12 h-12 text-secondary-500" />,
-      title: 'Innovation',
-      description: 'We stay ahead of the curve, constantly exploring new technologies and strategies to give our clients a competitive edge.',
+      icon: <Code className="w-8 h-8" />,
+      title: 'Gatistwam Tech',
+      description: 'Web Dev, UI/UX, E-commerce, ERP/CRM, Cloud, APIs, MVPs, Custom Software, Mobile Apps',
+      color: 'from-purple-500 to-indigo-500'
     },
     {
-      id: 3,
-      icon: <Target className="w-12 h-12 text-secondary-500" />,
-      title: 'Excellence',
-      description: 'We are committed to delivering excellence in everything we do, from strategy to execution and beyond.',
+      icon: <Palette className="w-8 h-8" />,
+      title: 'Gatistwam Graphics',
+      description: 'Printing, Packaging, Branding, Stationery, Merchandise, Displays, Signage, Gifting, Events',
+      color: 'from-pink-500 to-rose-500'
     },
     {
-      id: 4,
-      icon: <TrendingUp className="w-12 h-12 text-secondary-500" />,
-      title: 'Results-Driven',
-      description: 'We focus on generating measurable results that contribute to our clients\' business growth and success.',
+      icon: <Users className="w-8 h-8" />,
+      title: 'Gatistwam HR',
+      description: 'Recruitment, HR Outsourcing, Payroll, Talent Consulting',
+      color: 'from-green-500 to-emerald-500'
     },
+    {
+      icon: <GraduationCap className="w-8 h-8" />,
+      title: 'Gatistwam Academy',
+      description: 'Online & Offline Courses, Corporate Training',
+      color: 'from-yellow-500 to-amber-500'
+    },
+    {
+      icon: <Heart className="w-8 h-8" />,
+      title: 'Gatistwam Foundation',
+      description: 'Ecommerce Support, Social Campaigns, Innovation & Upliftment',
+      color: 'from-red-500 to-orange-500'
+    }
   ];
 
   return (
     <>
       <PageHeader 
-        title="About Us"
-        subtitle="Learn more about our company, our mission, and our values."
-        bgImage="https://images.pexels.com/photos/7688854/pexels-photo-7688854.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        title="About Gatistwam"
+        subtitle="Our Journey from Advert Marketing to a Multi-Service Powerhouse"
+        bgImage="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
       />
-      
-      {/* Our Story Section */}
-      <section className="section bg-white dark:bg-gray-900">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <AnimatedElement>
-              <h2 className="section-title">Our Story</h2>
-              <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-                Founded in 2015, Gatistwam began as a small team of digital marketing enthusiasts with a vision to transform how businesses connect with their audiences online.
-              </p>
-              <p className="text-gray-700 dark:text-gray-300 mb-6">
-                Over the years, we've grown into a full-service digital marketing agency, helping businesses of all sizes achieve their marketing goals. Our journey has been one of continuous learning, innovation, and growth.
-              </p>
-              <p className="text-gray-700 dark:text-gray-300">
-                Today, we're proud to work with clients across industries, providing strategic marketing solutions that drive real business results. Our team has expanded to include specialists in SEO, content marketing, social media, PPC, email marketing, and web development.
-              </p>
-            </AnimatedElement>
-            
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <img 
-                src="https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
-                alt="Gatistwam Team" 
-                className="rounded-lg shadow-xl"
-              />
-            </motion.div>
-          </div>
+
+      {/* Hero Section with Background Pattern */}
+      <section className="relative bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 overflow-hidden">
+        <div className="absolute inset-0 opacity-5 dark:opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundSize: '60px 60px'
+          }} />
         </div>
-      </section>
-      
-      {/* Mission & Vision Section */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <AnimatedElement className="glass-card p-8">
-              <h3 className="text-2xl font-bold text-primary-600 dark:text-white mb-4">Our Mission</h3>
-              <p className="text-gray-700 dark:text-gray-300">
-                To empower businesses with innovative digital marketing solutions that drive growth, enhance brand presence, and deliver measurable results. We are committed to understanding our clients' unique challenges and opportunities, partnering with them to achieve their business objectives.
+
+        <div className="container-custom relative">
+          {/* Brand Evolution */}
+          <AnimatedElement>
+            <div className="text-center py-20">
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="inline-block mb-6"
+              >
+                <Sparkles className={`w-12 h-12 ${theme === 'light' ? 'text-primary-500' : 'text-[#8BD7BB]'}`} />
+              </motion.div>
+              <h2 className="text-5xl font-bold mb-8">
+                <span className={theme === 'light' ? 'text-gray-900' : 'text-white'}>Our </span>
+                <span className={theme === 'light' ? 'text-primary-500' : 'text-[#8BD7BB]'}>Evolution</span>
+              </h2>
+              <p className={`text-xl max-w-4xl mx-auto leading-relaxed ${
+                theme === 'light' ? 'text-gray-700' : 'text-gray-300'
+              }`}>
+                Our journey began as Advert Marketing, providing digital marketing support to business owners. 
+                Today, we're evolving into a more powerful and expansive identity — Gatistwam — an umbrella 
+                organization uniting multiple verticals under one brand.
               </p>
-            </AnimatedElement>
-            
-            <AnimatedElement className="glass-card p-8" delay={100}>
-              <h3 className="text-2xl font-bold text-primary-600 dark:text-white mb-4">Our Vision</h3>
-              <p className="text-gray-700 dark:text-gray-300">
-                To be the most trusted digital marketing partner for businesses seeking sustainable growth in the digital landscape. We strive to stay at the forefront of industry trends and technologies, continuously evolving our strategies to help our clients stay ahead of the competition.
-              </p>
-            </AnimatedElement>
-          </div>
-        </div>
-      </section>
-      
-      {/* Our Values Section */}
-      <section className="section bg-white dark:bg-gray-900">
-        <div className="container-custom">
-          <AnimatedElement className="text-center mb-16">
-            <h2 className="section-title">Our Core Values</h2>
-            <p className="section-subtitle mx-auto">
-              The principles that guide everything we do at Gatistwam.
-            </p>
+            </div>
           </AnimatedElement>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {values.map((value, index) => (
-              <AnimatedElement key={value.id} delay={index * 100}>
-                <div className="glass-card p-8 h-full">
-                  <div className="mb-4">
-                    {value.icon}
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3 text-primary-600 dark:text-white">
-                    {value.title}
-                  </h3>
-                  <p className="text-gray-700 dark:text-gray-300">
-                    {value.description}
-                  </p>
-                </div>
-              </AnimatedElement>
-            ))}
+        </div>
+      </section>
+
+      {/* Our Mission Section */}
+      <section className="bg-white dark:bg-gray-900 py-12">
+        <div className="container-custom">
+          <div className="max-w-3xl mx-auto">
+            <h2 className={`text-3xl font-bold mb-6 ${theme === 'light' ? 'text-gray-900' : 'text-white'}`}>Our Mission</h2>
+            <ul className={`space-y-2 text-lg ${theme === 'light' ? 'text-gray-800' : 'text-gray-200'}`}>
+              <li>- To offer tailored tech and branding solutions</li>
+              <li>- To foster human capital through expert HR services</li>
+              <li>- To enable startups with end-to-end management support</li>
+              <li>- To give back through impactful CSR initiatives.</li>
+            </ul>
           </div>
         </div>
       </section>
-      
-      {/* Stats Section */}
-      <StatsSection />
-    
+
+      {/* Brand Psychology Section */}
+      <section className="section bg-white dark:bg-gray-900">
+        <div className="container-custom">
+          <AnimatedElement delay={100}>
+            <div className="relative bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-gray-800 dark:to-gray-700 rounded-3xl p-12 mb-20 overflow-hidden">
+              {/* Decorative Elements */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary-500/10 to-secondary-500/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-primary-500/10 to-secondary-500/10 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2" />
+              
+              <div className="relative">
+                <div className="flex items-center justify-center mb-8">
+                  <div className="p-4 rounded-2xl bg-white dark:bg-gray-800 shadow-lg">
+                    <Brain className={`w-12 h-12 ${theme === 'light' ? 'text-primary-500' : 'text-secondary-500'}`} />
+                  </div>
+                </div>
+                <h2 className="text-4xl font-bold text-center mb-12">
+                  <span className={theme === 'light' ? 'text-gray-900' : 'text-white'}>The </span>
+                  <span className={theme === 'light' ? 'text-primary-500' : 'text-[#8BD7BB]'}>Essence of Gatistwam</span>
+                </h2>
+                <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                  <div className="space-y-6">
+                    <h3 className={`text-2xl font-semibold ${
+                      theme === 'light' ? 'text-gray-900' : 'text-white'
+                    }`}>
+                      Sanskrit Roots
+                    </h3>
+                    <p className={`text-lg ${
+                      theme === 'light' ? 'text-gray-700' : 'text-gray-300'
+                    }`}>
+                      The name Gatistwam is derived from Sanskrit, inspired by the sacred verses of Bhavani Ashtakam.
+                    </p>
+                    <div className="space-y-4 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                      <div className="flex items-center space-x-4">
+                        <div className="w-12 h-12 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center">
+                          <span className={`text-2xl ${theme === 'light' ? 'text-primary-500' : 'text-[#8BD7BB]'}`}>ग</span>
+                        </div>
+                        <div>
+                          <p className={`text-xl font-semibold ${
+                            theme === 'light' ? 'text-gray-900' : 'text-white'
+                          }`}>
+                            Gati (गति)
+                          </p>
+                          <p className={theme === 'light' ? 'text-gray-700' : 'text-gray-300'}>
+                            Movement, Progress, Momentum
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-4">
+                        <div className="w-12 h-12 rounded-full bg-secondary-100 dark:bg-secondary-900 flex items-center justify-center">
+                          <span className={`text-2xl ${theme === 'light' ? 'text-primary-500' : 'text-[#8BD7BB]'}`}>स्व</span>
+                        </div>
+                        <div>
+                          <p className={`text-xl font-semibold ${
+                            theme === 'light' ? 'text-gray-900' : 'text-white'
+                          }`}>
+                            Swam (स्वम्)
+                          </p>
+                          <p className={theme === 'light' ? 'text-gray-700' : 'text-gray-300'}>
+                            Self, Ownership, Innate Power
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-6">
+                    <h3 className={`text-2xl font-semibold ${
+                      theme === 'light' ? 'text-gray-900' : 'text-white'
+                    }`}>
+                      Our Philosophy
+                    </h3>
+                    <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                      <p className={`text-lg leading-relaxed ${
+                        theme === 'light' ? 'text-gray-700' : 'text-gray-300'
+                      }`}>
+                        Together, these elements embody "Momentum towards growth and transformation" — 
+                        reflecting dynamic energy, self-empowerment, and forward movement, grounded in 
+                        Indian ethos with a modern twist.
+                      </p>
+                      <div className="mt-6 flex items-center text-primary-500 dark:text-[#8BD7BB]">
+                        <ArrowRight className="w-5 h-5 mr-2" />
+                        <span className="font-semibold">Driving Innovation with Tradition</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </AnimatedElement>
+
+          {/* Our Verticals */}
+          <AnimatedElement delay={200}>
+            <div className="text-center mb-16">
+              <h2 className="text-5xl font-bold mb-8">
+                <span className={theme === 'light' ? 'text-gray-900' : 'text-white'}>Our </span>
+                <span className={theme === 'light' ? 'text-primary-500' : 'text-[#8BD7BB]'}>Verticals</span>
+              </h2>
+              <p className={`text-xl max-w-4xl mx-auto ${
+                theme === 'light' ? 'text-gray-700' : 'text-gray-300'
+              }`}>
+                We are building a brand that houses multiple specialized verticals, each dedicated to 
+                excellence in its domain.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {verticals.map((vertical, index) => (
+                <motion.div
+                  key={vertical.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="group relative"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl blur-xl"
+                    style={{ backgroundImage: `linear-gradient(to bottom right, ${vertical.color})` }}
+                  />
+                  <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 h-full">
+                    <div className={`inline-block p-3 rounded-xl bg-gradient-to-br ${vertical.color} mb-6`}>
+                      <div className="text-white">
+                        {vertical.icon}
+                      </div>
+                    </div>
+                    <h3 className={`text-2xl font-bold mb-4 ${
+                      theme === 'light' ? 'text-gray-900' : 'text-white'
+                    }`}>
+                      {vertical.title}
+                    </h3>
+                    <p className={theme === 'light' ? 'text-gray-700' : 'text-gray-300'}>
+                      {vertical.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </AnimatedElement>
+
+          {/* Vision Statement */}
+          <AnimatedElement delay={300}>
+            <div className="mt-24 text-center">
+              <div className={`inline-block p-4 rounded-2xl bg-gradient-to-br ${theme === 'light' ? 'from-primary-500 to-secondary-500' : 'from-secondary-500 to-primary-500'} mb-8`}>
+                <Rocket className="w-12 h-12 text-white" />
+              </div>
+              <h2 className="text-4xl font-bold mb-6">
+                <span className={theme === 'light' ? 'text-gray-900' : 'text-white'}>Our </span>
+                <span className={theme === 'light' ? 'text-primary-500' : 'text-[#8BD7BB]'}>Vision</span>
+              </h2>
+              <p className={`text-xl max-w-3xl mx-auto leading-relaxed ${
+                theme === 'light' ? 'text-gray-700' : 'text-gray-300'
+              }`}>
+                To be the driving force behind transformative growth, empowering businesses and 
+                individuals through innovative solutions and unwavering commitment to excellence.
+              </p>
+            </div>
+          </AnimatedElement>
+        </div>
+      </section>
     </>
   );
 };
