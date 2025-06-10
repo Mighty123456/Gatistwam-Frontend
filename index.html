@@ -11,5 +11,9 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script type="module">
+      const apiUrl = import.meta.env.VITE_API_URL;
+      // Use apiUrl for your fetch/axios requests
+    </script>
   </body>
 </html>
