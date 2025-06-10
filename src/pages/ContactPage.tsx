@@ -5,6 +5,21 @@ import { useNavigate } from 'react-router-dom';
 import PageHeader from '../components/layout/PageHeader';
 import AnimatedElement from '../components/ui/AnimatedElement';
 import Button from '../components/ui/Button';
+import { API_ENDPOINTS } from '../config/api';
+
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+}
+
+interface FormStatus {
+  submitted: boolean;
+  success: boolean;
+  message: string;
+}
 
 const ContactPage: React.FC = () => {
   const navigate = useNavigate();
@@ -15,7 +30,7 @@ const ContactPage: React.FC = () => {
   }, []);
 
   // Form state
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     phone: '',
@@ -25,11 +40,7 @@ const ContactPage: React.FC = () => {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  const [formStatus, setFormStatus] = useState<{
-    submitted: boolean;
-    success: boolean;
-    message: string;
-  }>({
+  const [formStatus, setFormStatus] = useState<FormStatus>({
     submitted: false,
     success: false,
     message: '',
@@ -47,7 +58,7 @@ const ContactPage: React.FC = () => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('http://localhost:3000/api/contact', {
+      const response = await fetch(API_ENDPOINTS.contact, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
