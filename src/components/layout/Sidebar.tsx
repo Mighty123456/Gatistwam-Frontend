@@ -66,7 +66,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                       Contact Information
                     </h3>
                     <div className="space-y-2 text-gray-600 dark:text-gray-400">
-                      <p>Email: advertmarketing1988@gmail.com</p>
+                      <p>Email: thegatistwam@gmail.com</p>
                       <p>Phone: +91 9274524365</p>
                       <p>Address: Shrimat Arcade, 01, Anand - Sojitra Rd, Nand Tanuj Society, Karamsad, Anand, Gujarat 388121</p>
                     </div>
@@ -87,10 +87,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
               {/* Social Media Icons */}
               <div className="flex items-center justify-center space-x-4 p-6 border-t dark:border-gray-800">
-                <a href="#" className={iconClass}><Facebook size={24} /></a>
+                <a href="https://www.facebook.com/profile.php?id=61575698426330" target="_blank" rel="noopener noreferrer" className={iconClass}><Facebook size={24} /></a>
                 <a href="#" className={iconClass}><Twitter size={24} /></a>
-                <a href="#" className={iconClass}><Instagram size={24} /></a>
-                <a href="#" className={iconClass}><Linkedin size={24} /></a>
+                <a href="https://www.instagram.com/gatistwamofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" className={iconClass}><Instagram size={24} /></a>
+                <a href="https://www.linkedin.com/in/bhavik-panchal-7b965217/" target="_blank" rel="noopener noreferrer" className={iconClass}><Linkedin size={24} /></a>
                 <a href="#" className={iconClass}><Youtube size={24} /></a>
               </div>
             </div>

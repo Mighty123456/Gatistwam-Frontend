@@ -61,10 +61,10 @@ const Footer: React.FC = () => {
                 Empowering businesses with innovative digital marketing solutions that drive growth and deliver results.
               </p>
               <div className="flex space-x-3">
-                <a href="#" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}><Facebook size={20} /></a>
+                <a href="https://www.facebook.com/profile.php?id=61575698426330" target="_blank" rel="noopener noreferrer" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}><Facebook size={20} /></a>
                 <a href="#" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}><Twitter size={20} /></a>
-                <a href="#" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}><Instagram size={20} /></a>
-                <a href="#" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}><Linkedin size={20} /></a>
+                <a href="https://www.instagram.com/gatistwamofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}><Instagram size={20} /></a>
+                <a href="https://www.linkedin.com/in/bhavik-panchal-7b965217/" target="_blank" rel="noopener noreferrer" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}><Linkedin size={20} /></a>
                 <a href="#" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}><Youtube size={20} /></a>
               </div>
             </div>
