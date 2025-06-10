@@ -54,7 +54,7 @@ const PortfolioManagement: React.FC = () => {
         return;
       }
 
-      const response = await axios.get('/api/portfolio', {
+      const response = await axios.get(`${API_BASE_URL}/api/portfolio`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
