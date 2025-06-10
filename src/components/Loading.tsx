@@ -41,7 +41,7 @@ const Loading: React.FC = () => {
           {/* Logo container */}
           <div className="absolute inset-0 flex items-center justify-center">
             <img 
-              src="/src/assets/images/logo-light.png" 
+              src="/images/logo-light.png" 
               alt="Gatistwam Logo" 
               className={`w-16 h-16 transition-all duration-300 ${
                 isHovered ? 'animate-bounce-slow' : 'animate-pulse'
