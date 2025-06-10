@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ExternalLink } from 'lucide-react';
-import { motion } from 'framer-motion';
 import AnimatedElement from '../ui/AnimatedElement';
-import Button from '../ui/Button';
 import axios from 'axios';
 
 interface PortfolioItem {
@@ -104,7 +101,7 @@ const PortfolioSection: React.FC = () => {
         
         {/* Projects grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project, index) => (
+          {filteredProjects.map(project => (
             <AnimatedElement key={project._id}>
               <div className="group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
                 <div className="relative aspect-[4/3] w-full">
