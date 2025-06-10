@@ -280,7 +280,7 @@ const PortfolioManagement: React.FC = () => {
       }
 
       console.log('Attempting image upload...');
-      const response = await axios.post('/api/portfolio/upload', formData, {
+      const response = await axios.post(`${API_BASE_URL}/api/portfolio/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`

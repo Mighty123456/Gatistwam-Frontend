@@ -181,7 +181,7 @@ const BlogManagement: React.FC = () => {
       }
 
       console.log('Attempting image upload...');
-      const response = await axios.post('/api/blog/upload', formData, {
+      const response = await axios.post(`${API_BASE_URL}/api/blog/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`
@@ -191,12 +191,13 @@ const BlogManagement: React.FC = () => {
       console.log('Image upload response:', response.data);
 
       if (response.data.success && response.data.filePath) {
+        const imageUrl = `${API_BASE_URL}${response.data.filePath}`;
         setFormData(prev => ({
           ...prev,
-          imageUrl: response.data.filePath
+          imageUrl: imageUrl
         }));
         toast.success('Image uploaded successfully');
-        console.log('Image uploaded, imageUrl set:', response.data.filePath);
+        console.log('Image uploaded, imageUrl set:', imageUrl);
       } else {
         console.error('Image upload success: ', response.data.success, ' filePath: ', response.data.filePath);
         toast.error(response.data.message || 'Image upload failed');
