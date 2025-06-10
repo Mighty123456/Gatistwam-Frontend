@@ -8,11 +8,8 @@ const App = lazy(() => import('./App.tsx'));
 
 // Add preload hints for critical resources
 const preloadCriticalResources = () => {
-  const link = document.createElement('link');
-  link.rel = 'preload';
-  link.as = 'style';
-  link.href = '/src/index.css';
-  document.head.appendChild(link);
+  // Remove the CSS preload as it's already imported directly
+  // The CSS will be handled by Vite's build process
 };
 
 // Initialize preload hints
