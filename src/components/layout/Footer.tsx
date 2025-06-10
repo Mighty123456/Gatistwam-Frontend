@@ -62,7 +62,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className={`${footerClass} pt-16 pb-8 relative z-10`}>
+    <footer className={`${footerClass} pt-16 pb-8 relative z-10 mt-auto`}>
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
