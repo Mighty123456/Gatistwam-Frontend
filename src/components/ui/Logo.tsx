@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTheme } from '../../context/ThemeContext';
 
 interface LogoProps {
@@ -8,6 +8,7 @@ interface LogoProps {
 
 const Logo: React.FC<LogoProps> = ({ size = 'md', className = '' }) => {
   const { theme } = useTheme();
+  const [imgError, setImgError] = useState(false);
   
   // Determine size classes based on prop
   const sizeClasses = {
@@ -15,14 +16,21 @@ const Logo: React.FC<LogoProps> = ({ size = 'md', className = '' }) => {
     md: 'h-10',
     lg: 'h-16',
   };
+
+  const handleImageError = () => {
+    setImgError(true);
+  };
   
   return (
     <img 
-      src={theme === 'light' 
-        ? '/images/logo-light.png' 
-        : '/images/logo-dark.png'} 
+      src={imgError 
+        ? (theme === 'light' ? '/logo-light.png' : '/logo-dark.png')
+        : (theme === 'light' 
+          ? '/images/logo-light.png' 
+          : '/images/logo-dark.png')}
       alt="Gatistwam Logo" 
       className={`${sizeClasses[size]} transition-all duration-300 ${className}`}
+      onError={handleImageError}
     />
   );
 };
