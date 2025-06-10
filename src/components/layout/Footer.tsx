@@ -14,6 +14,8 @@ const Footer: React.FC = () => {
   const [isSubscribing, setIsSubscribing] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
 
+  console.log('Footer component rendered'); // Debug log
+
   const footerClass = theme === 'light'
     ? 'bg-white text-gray-900'
     : 'bg-gray-900 text-white';
@@ -62,7 +64,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className={`${footerClass} pt-16 pb-8 relative z-10 mt-auto`}>
+    <footer className={`${footerClass} pt-16 pb-8 relative z-10 mt-auto bg-opacity-100`}>
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
