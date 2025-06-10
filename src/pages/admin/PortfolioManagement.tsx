@@ -54,7 +54,7 @@ const PortfolioManagement: React.FC = () => {
         return;
       }
 
-      const response = await axios.get('/api/portfolio', {
+      const response = await axios.get('/.netlify/functions/portfolio', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
