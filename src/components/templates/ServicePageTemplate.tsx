@@ -118,7 +118,7 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
           className="mt-20"
         >
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-6 text-[#8BD7BB]">
+            <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">
               Why Choose Our {title} Services?
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
