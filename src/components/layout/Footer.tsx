@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Youtube, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Send } from 'lucide-react';
 import Logo from '../ui/Logo';
 import { useTheme } from '../../context/ThemeContext';
 import { toast } from 'react-hot-toast';
@@ -62,10 +62,8 @@ const Footer: React.FC = () => {
               </p>
               <div className="flex space-x-3">
                 <a href="https://www.facebook.com/profile.php?id=61575698426330" target="_blank" rel="noopener noreferrer" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}><Facebook size={20} /></a>
-                <a href="#" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}><Twitter size={20} /></a>
                 <a href="https://www.instagram.com/gatistwamofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}><Instagram size={20} /></a>
-                <a href="https://www.linkedin.com/in/bhavik-panchal-7b965217/" target="_blank" rel="noopener noreferrer" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}><Linkedin size={20} /></a>
-                <a href="#" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}><Youtube size={20} /></a>
+                <a href="https://www.linkedin.com/company/gatistwam/" target="_blank" rel="noopener noreferrer" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}><Linkedin size={20} /></a>
               </div>
             </div>
           </div>

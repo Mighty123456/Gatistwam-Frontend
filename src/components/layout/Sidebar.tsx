@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Facebook, Twitter, Instagram, Linkedin, Youtube, MapPin, Phone, Mail } from 'lucide-react';
+import { X, Facebook, Instagram, Linkedin } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../context/ThemeContext';
 
@@ -88,10 +88,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
               {/* Social Media Icons */}
               <div className="flex items-center justify-center space-x-4 p-6 border-t dark:border-gray-800">
                 <a href="https://www.facebook.com/profile.php?id=61575698426330" target="_blank" rel="noopener noreferrer" className={iconClass}><Facebook size={24} /></a>
-                <a href="#" className={iconClass}><Twitter size={24} /></a>
                 <a href="https://www.instagram.com/gatistwamofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" className={iconClass}><Instagram size={24} /></a>
-                <a href="https://www.linkedin.com/in/bhavik-panchal-7b965217/" target="_blank" rel="noopener noreferrer" className={iconClass}><Linkedin size={24} /></a>
-                <a href="#" className={iconClass}><Youtube size={24} /></a>
+                <a href="https://www.linkedin.com/company/gatistwam/" target="_blank" rel="noopener noreferrer" className={iconClass}><Linkedin size={24} /></a>
               </div>
             </div>
           </motion.div>
