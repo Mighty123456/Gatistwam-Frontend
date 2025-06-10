@@ -7,6 +7,7 @@ import { saveToGoogleSheets, SubscriptionData } from '../utils/googleSheets';
 import axios from 'axios';
 import { useTheme } from '../context/ThemeContext';
 import { Link } from 'react-router-dom';
+import { API_ENDPOINTS } from '../config/api';
 
 interface BlogPost {
   _id: string;
@@ -21,8 +22,6 @@ interface BlogPost {
   tags: string[];
   status: 'published' | 'draft';
 }
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
 
 const BlogPage: React.FC = () => {
   const { theme } = useTheme();
@@ -39,7 +38,7 @@ const BlogPage: React.FC = () => {
     if (imageUrl.startsWith('http')) return imageUrl;
     if (imageUrl.startsWith('/uploads/')) {
       const cleanPath = imageUrl.startsWith('/') ? imageUrl : `/${imageUrl}`;
-      return `${API_BASE_URL}${cleanPath}`;
+      return `${API_ENDPOINTS.blog.all}${cleanPath}`;
     }
     return imageUrl;
   };
@@ -47,7 +46,7 @@ const BlogPage: React.FC = () => {
   useEffect(() => {
     const fetchBlogPosts = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/api/blog/status/published`);
+        const response = await axios.get(API_ENDPOINTS.blog.byStatus('published'));
         setBlogPosts(response.data);
         setError(null);
       } catch (err) {

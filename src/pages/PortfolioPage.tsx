@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import PageHeader from '../components/layout/PageHeader';
 import axios from 'axios';
+import { API_ENDPOINTS } from '../config/api';
 
 interface PortfolioItem {
   _id: string;
@@ -18,8 +19,6 @@ interface PortfolioItem {
   githubUrl?: string;
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
-
 const PortfolioPage: React.FC = () => {
   const [projects, setProjects] = useState<PortfolioItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -31,8 +30,8 @@ const PortfolioPage: React.FC = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        console.log('Fetching projects with API_BASE_URL:', API_BASE_URL);
-        const response = await axios.get(`${API_BASE_URL}/api/portfolio/status/published`);
+        console.log('Fetching projects...');
+        const response = await axios.get(API_ENDPOINTS.portfolio.byStatus('published'));
         console.log('Received projects:', response.data);
         setProjects(response.data);
         setError(null);
@@ -59,16 +58,11 @@ const PortfolioPage: React.FC = () => {
   };
 
   const getImageUrl = (imageUrl: string) => {
-    console.log('Original imageUrl:', imageUrl);
-    console.log('API_BASE_URL:', API_BASE_URL);
-    
     if (!imageUrl) return '';
     if (imageUrl.startsWith('http')) return imageUrl;
     if (imageUrl.startsWith('/uploads/')) {
       const cleanPath = imageUrl.startsWith('/') ? imageUrl : `/${imageUrl}`;
-      const finalUrl = `${API_BASE_URL}${cleanPath}`;
-      console.log('Constructed URL:', finalUrl);
-      return finalUrl;
+      return `${API_ENDPOINTS.portfolio.all}${cleanPath}`;
     }
     return imageUrl;
   };

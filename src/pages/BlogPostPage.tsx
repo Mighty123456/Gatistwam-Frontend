@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 import PageHeader from '../components/layout/PageHeader';
 import { toast } from 'react-hot-toast';
+import { API_ENDPOINTS } from '../config/api';
 
 interface BlogPost {
   _id: string;
@@ -20,8 +21,6 @@ interface BlogPost {
   tags: string[];
   status: 'published' | 'draft';
 }
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
 
 const BlogPostPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -39,7 +38,7 @@ const BlogPostPage: React.FC = () => {
     if (imageUrl.startsWith('http')) return imageUrl;
     if (imageUrl.startsWith('/uploads/')) {
       const cleanPath = imageUrl.startsWith('/') ? imageUrl : `/${imageUrl}`;
-      return `${API_BASE_URL}${cleanPath}`;
+      return `${API_ENDPOINTS.blog.all}${cleanPath}`;
     }
     return imageUrl;
   };
@@ -47,7 +46,7 @@ const BlogPostPage: React.FC = () => {
   useEffect(() => {
     const fetchBlogPost = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/api/blog/${id}`);
+        const response = await axios.get(API_ENDPOINTS.blog.byId(id || ''));
         setPost(response.data);
         setError(null);
       } catch (err) {
