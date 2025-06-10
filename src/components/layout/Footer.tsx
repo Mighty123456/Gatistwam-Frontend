@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Youtube, Send } from 'lucide-react';
-import AnimatedElement from '../ui/AnimatedElement';
 import Logo from '../ui/Logo';
 import { useTheme } from '../../context/ThemeContext';
 import { toast } from 'react-hot-toast';
@@ -14,47 +13,34 @@ const Footer: React.FC = () => {
   const [isSubscribing, setIsSubscribing] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
 
-  console.log('Footer component rendered'); // Debug log
-
   const footerClass = theme === 'light'
     ? 'bg-white text-gray-900'
     : 'bg-gray-900 text-white';
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!email) {
       toast.error('Please enter your email address');
       return;
     }
-
     try {
       setIsSubscribing(true);
-      
-      // Prepare subscription data
       const subscriptionData: SubscriptionData = {
         email,
         timestamp: new Date().toISOString(),
         source: 'Newsletter Subscription'
       };
-
-      // Save to Google Sheets
       const success = await saveToGoogleSheets(subscriptionData);
-      
       if (success) {
-        // Update UI state
         setIsSubscribed(true);
         setEmail('');
         toast.success('Successfully subscribed to our newsletter!');
-        
-        // Reset subscription status after 5 seconds
         setTimeout(() => {
           setIsSubscribed(false);
         }, 5000);
       } else {
         toast.error('Failed to subscribe. Please try again later.');
       }
-      
     } catch (error) {
       console.error('Failed to subscribe:', error);
       toast.error('Failed to subscribe. Please try again later.');
@@ -68,34 +54,23 @@ const Footer: React.FC = () => {
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
-          <AnimatedElement className="col-span-1 lg:col-span-1">
+          <div className="col-span-1 lg:col-span-1">
             <div className="mb-6">
               <Logo size="lg" />
               <p className={theme === 'light' ? 'text-gray-600 mb-4' : 'text-gray-400 mb-4'}>
                 Empowering businesses with innovative digital marketing solutions that drive growth and deliver results.
               </p>
               <div className="flex space-x-3">
-                <a href="#" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}>
-                  <Facebook size={20} />
-                </a>
-                <a href="#" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}>
-                  <Twitter size={20} />
-                </a>
-                <a href="#" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}>
-                  <Instagram size={20} />
-                </a>
-                <a href="#" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}>
-                  <Linkedin size={20} />
-                </a>
-                <a href="#" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}>
-                  <Youtube size={20} />
-                </a>
+                <a href="#" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}><Facebook size={20} /></a>
+                <a href="#" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}><Twitter size={20} /></a>
+                <a href="#" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}><Instagram size={20} /></a>
+                <a href="#" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}><Linkedin size={20} /></a>
+                <a href="#" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}><Youtube size={20} /></a>
               </div>
             </div>
-          </AnimatedElement>
-
+          </div>
           {/* Quick Links */}
-          <AnimatedElement className="col-span-1" delay={100}>
+          <div className="col-span-1">
             <h3 className="text-lg font-semibold mb-4" style={{ color: theme === 'light' ? '#111827' : '#fff' }}>Quick Links</h3>
             <ul className="space-y-2">
               <li><Link to="/about" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}>About Us</Link></li>
@@ -105,10 +80,9 @@ const Footer: React.FC = () => {
               <li><Link to="/faq" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}>FAQs</Link></li>
               <li><Link to="/contact" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}>Contact Us</Link></li>
             </ul>
-          </AnimatedElement>
-
+          </div>
           {/* Services */}
-          <AnimatedElement className="col-span-1" delay={200}>
+          <div className="col-span-1">
             <h3 className="text-lg font-semibold mb-4" style={{ color: theme === 'light' ? '#111827' : '#fff' }}>Our Services</h3>
             <ul className="space-y-2">
               <li><Link to="/services/management-solutions" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}>Management Solutions</Link></li>
@@ -120,10 +94,9 @@ const Footer: React.FC = () => {
               <li><Link to="/services/ecommerce-support" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}>Ecommerce Support</Link></li>
               <li><Link to="/services/digital-branding" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}>Digital Branding</Link></li>
             </ul>
-          </AnimatedElement>
-
+          </div>
           {/* Contact Info & Newsletter */}
-          <AnimatedElement className="col-span-1" delay={300}>
+          <div className="col-span-1">
             <h3 className="text-lg font-semibold mb-4" style={{ color: theme === 'light' ? '#111827' : '#fff' }}>Contact Us</h3>
             <ul className="space-y-3 mb-8">
               <li className="flex items-start">
@@ -143,7 +116,6 @@ const Footer: React.FC = () => {
                 <a href="mailto:advertmarketing1988@gmail.com" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}>advertmarketing1988@gmail.com</a>
               </li>
             </ul>
-
             {/* Newsletter Section */}
             <div className="pt-4 border-t border-gray-200 dark:border-gray-800">
               <h4 className="text-sm font-semibold mb-2 text-primary-500 dark:text-secondary-500">
@@ -196,9 +168,8 @@ const Footer: React.FC = () => {
                 </form>
               )}
             </div>
-          </AnimatedElement>
+          </div>
         </div>
-
         {/* Copyright */}
         <div className={theme === 'light' ? 'mt-12 pt-8 border-t border-gray-200 text-center text-gray-500' : 'mt-12 pt-8 border-t border-gray-800 text-center text-gray-500'}>
           <p>&copy; {currentYear} Gatistwam. All rights reserved.</p>
@@ -208,4 +179,4 @@ const Footer: React.FC = () => {
   );
 };
 
-export default Footer;
+export default Footer; 
