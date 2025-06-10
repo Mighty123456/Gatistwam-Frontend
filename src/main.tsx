@@ -1,7 +1,7 @@
 import { StrictMode, lazy, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
-import './index.css';
 import Loading from './components/Loading';
+import './styles/index.css';
 
 // Lazy load the main App component
 const App = lazy(() => import('./App.tsx'));
@@ -11,7 +11,7 @@ const preloadCriticalResources = () => {
   const link = document.createElement('link');
   link.rel = 'preload';
   link.as = 'style';
-  link.href = '/src/index.css';
+  link.href = '/styles/index.css';
   document.head.appendChild(link);
 };
 
