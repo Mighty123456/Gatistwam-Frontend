@@ -6,18 +6,6 @@ import Loading from './components/Loading';
 // Lazy load the main App component
 const App = lazy(() => import('./App.tsx'));
 
-// Add preload hints for critical resources
-const preloadCriticalResources = () => {
-  const link = document.createElement('link');
-  link.rel = 'preload';
-  link.as = 'style';
-  link.href = '/src/index.css';
-  document.head.appendChild(link);
-};
-
-// Initialize preload hints
-preloadCriticalResources();
-
 // Render with Suspense for better loading experience
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
