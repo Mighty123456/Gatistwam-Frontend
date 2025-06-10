@@ -122,7 +122,7 @@ const PortfolioManagement: React.FC = () => {
           return;
         }
 
-        const response = await axios.delete(`/api/portfolio/${id}`, {
+        const response = await axios.delete(`${API_BASE_URL}/api/portfolio/${id}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -203,7 +203,7 @@ const PortfolioManagement: React.FC = () => {
       if (editingId) {
         // Update existing item
         console.log('Updating portfolio item with ID:', editingId, portfolioData);
-        response = await axios.put(`/api/portfolio/${editingId}`, portfolioData, {
+        response = await axios.put(`${API_BASE_URL}/api/portfolio/${editingId}`, portfolioData, {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -213,7 +213,7 @@ const PortfolioManagement: React.FC = () => {
       } else {
         // Create new item
         console.log('Creating new portfolio item:', portfolioData);
-        response = await axios.post('/api/portfolio', portfolioData, {
+        response = await axios.post(`${API_BASE_URL}/api/portfolio`, portfolioData, {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
