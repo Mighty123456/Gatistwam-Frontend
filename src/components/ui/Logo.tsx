@@ -19,8 +19,8 @@ const Logo: React.FC<LogoProps> = ({ size = 'md', className = '' }) => {
   return (
     <img 
       src={theme === 'light' 
-        ? '/src/assets/images/logo-light.png' 
-        : '/src/assets/images/logo-dark.png'} 
+        ? '/images/logo-light.png' 
+        : '/images/logo-dark.png'} 
       alt="Gatistwam Logo" 
       className={`${sizeClasses[size]} transition-all duration-300 ${className}`}
     />
