@@ -36,6 +36,9 @@ export default defineConfig(({ command }) => {
       'process.env.VITE_API_BASE_URL': JSON.stringify(
         isDevelopment ? 'http://localhost:3000' : 'https://gatistwam-backend.onrender.com'
       ),
+      'process.env.VITE_SITE_URL': JSON.stringify(
+        isDevelopment ? 'http://localhost:5173' : 'https://gatistwamgroup.com'
+      ),
     },
   };
 });
