@@ -30,7 +30,7 @@ const PortfolioSection: React.FC = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get('/.netlify/functions/portfolio/status/published');
+        const response = await axios.get('/api/portfolio/status/published');
         setProjects(response.data);
         setError(null);
       } catch (err) {

@@ -32,7 +32,7 @@ const PortfolioPage: React.FC = () => {
     const fetchProjects = async () => {
       try {
         console.log('Fetching projects with API_BASE_URL:', API_BASE_URL);
-        const response = await axios.get('/.netlify/functions/portfolio/status/published');
+        const response = await axios.get('/api/portfolio/status/published');
         console.log('Received projects:', response.data);
         setProjects(response.data);
         setError(null);
