@@ -3,6 +3,12 @@ import { useTheme } from '../../context/ThemeContext';
 import ServiceCard from '../../components/services/ServiceCard';
 import Button from '../../components/ui/Button';
 import { motion } from 'framer-motion';
+import graphicDesignImage from '../../assets/images/Digital Branding/graphic-design.jpg';
+
+// To manually add images, use this pattern:
+// import imageName from '../../assets/images/your-folder/image-name.extension';
+// Supported formats: .jpg, .jpeg, .png, .webp, .gif
+// Example: import myImage from '../../assets/images/services/my-image.jpg';
 
 interface ServiceDetail {
   title: string;
@@ -11,16 +17,28 @@ interface ServiceDetail {
   image: string;
 }
 
-const graphicDesignServices: ServiceDetail[] = [
+const designServices: ServiceDetail[] = [
   {
-    title: 'Logo & Brand Identity Design',
-    description: 'Create a powerful and memorable brand identity that resonates with your target audience. Our expert designers craft unique logos and comprehensive brand guidelines that reflect your company\'s values and vision.',
+    title: 'Brand Identity Design',
+    description: 'Create a unique and memorable brand identity that resonates with your target audience and sets you apart from competitors.',
     benefits: [
-      'Professional and unique logo design',
-      'Comprehensive brand guidelines',
-      'Multiple design concepts',
-      'Versatile file formats',
-      'Brand consistency across platforms'
+      'Logo design',
+      'Brand guidelines',
+      'Visual identity system',
+      'Brand collateral',
+      'Brand strategy'
+    ],
+    image: 'https://images.unsplash.com/photo-1634942537034-2531766767d1?w=800&h=400&fit=crop'
+  },
+  {
+    title: 'Digital Design',
+    description: 'Professional digital design solutions for web, social media, and digital marketing materials that engage your audience.',
+    benefits: [
+      'Social media graphics',
+      'Web design elements',
+      'Digital advertisements',
+      'Email templates',
+      'UI/UX design'
     ],
     image: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&h=400&fit=crop'
   },
@@ -159,7 +177,7 @@ const GraphicDesign: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className={`text-xl mb-6 font-medium ${
-                  theme === 'dark' ? 'text-[#8BD7BB]' : 'text-[#8BD7BB]'
+                  theme === 'dark' ? 'text-[#8BD7BB]' : 'text-gray-700'
                 }`}
               >
                 Transform your brand with stunning visual designs that capture attention and communicate your message effectively.
@@ -191,7 +209,7 @@ const GraphicDesign: React.FC = () => {
                   variant={theme === 'dark' ? 'primary' : 'primary'} 
                   size="lg" 
                   to="/contact"
-                  className={theme === 'dark' ? 'bg-primary-500 hover:bg-primary-600' : 'bg-primary-600 hover:bg-primary-700'}
+                  className={theme === 'dark' ? 'bg-[#8BD7BB] hover:bg-[#8BD7BB]/90' : 'bg-[#0E2A61] hover:bg-[#0E2A61]/90'}
                 >
                   Get Free Analysis
                 </Button>
@@ -202,15 +220,15 @@ const GraphicDesign: React.FC = () => {
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0, y: [0, -10, 0] }}
               transition={{ duration: 3, repeat: Infinity, repeatType: 'reverse', delay: 0.5 }}
-              className="flex justify-center items-center"
+              className="flex justify-center items-center w-full"
             >
               <img
-                src="https://cdn.iconscout.com/illustration/premium/thumb/graphic-design-5693467-4753827.svg"
-                alt="Graphic Design Illustration"
-                className={`w-full max-w-md rounded-2xl shadow-xl border ${
-                  theme === 'dark' 
-                    ? 'border-gray-700 bg-gray-800/70' 
-                    : 'border-gray-200 bg-white/70'
+                src={graphicDesignImage}
+                alt="Graphic Design Services"
+                className={`w-full max-w-2xl rounded-2xl shadow-xl border ${
+                  theme === 'dark'
+                    ? 'border-gray-700 bg-gray-800/90'
+                    : 'border-gray-200 bg-white/95'
                 }`}
               />
             </motion.div>
@@ -221,7 +239,7 @@ const GraphicDesign: React.FC = () => {
       {/* Main Content */}
       <div className="container-custom mx-auto px-4 py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {graphicDesignServices.map((service, idx) => (
+          {designServices.map((service, idx) => (
             <ServiceCard
               key={idx} 
               title={service.title}
@@ -240,7 +258,7 @@ const GraphicDesign: React.FC = () => {
           <p className="text-lg text-gray-100 mb-8 max-w-2xl mx-auto">
             Contact us today to discuss how our graphic design services can help you create a memorable brand identity.
           </p>
-          <button className="bg-white text-primary-600 dark:text-secondary-600 hover:bg-gray-100 font-semibold py-4 px-10 rounded-lg transition-colors text-lg">
+          <button onClick={() => window.location.href = '/contact'} className="bg-white text-primary-600 dark:text-secondary-600 hover:bg-gray-100 font-semibold py-4 px-10 rounded-lg transition-colors text-lg shadow-lg hover:shadow-xl">
             Get Started
           </button>
         </div>

@@ -3,6 +3,12 @@ import { useTheme } from '../../context/ThemeContext';
 import ServiceCard from '../../components/services/ServiceCard';
 import Button from '../../components/ui/Button';
 import { motion } from 'framer-motion';
+import researchImage from '../../assets/images/Digital Branding/research.jpg';
+
+// To manually add images, use this pattern:
+// import imageName from '../../assets/images/your-folder/image-name.extension';
+// Supported formats: .jpg, .jpeg, .png, .webp, .gif
+// Example: import myImage from '../../assets/images/services/my-image.jpg';
 
 interface ServiceDetail {
   title: string;
@@ -14,25 +20,25 @@ interface ServiceDetail {
 const researchServices: ServiceDetail[] = [
   {
     title: 'Market Research',
-    description: 'Gain valuable insights into your target market with our comprehensive market research services. We help you understand your customers, competitors, and market trends.',
+    description: 'Comprehensive market research services to help you understand your market and make informed business decisions.',
     benefits: [
-      'Competitive analysis',
-      'Customer behavior insights',
-      'Market trend identification',
-      'Demographic research',
-      'Industry benchmarking'
+      'Market analysis',
+      'Competitor research',
+      'Consumer insights',
+      'Trend analysis',
+      'Data-driven recommendations'
     ],
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop'
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop'
   },
   {
-    title: 'Data Analysis',
-    description: 'Transform raw data into actionable insights with our expert data analysis services. We help you make informed decisions based on solid data.',
+    title: 'Business Intelligence',
+    description: 'Transform your business data into actionable insights with our business intelligence services.',
     benefits: [
-      'Statistical analysis',
-      'Data visualization',
-      'Predictive modeling',
+      'Data analysis',
       'Performance metrics',
-      'Custom reporting'
+      'Strategic insights',
+      'Forecasting',
+      'Decision support'
     ],
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop'
   }
@@ -111,10 +117,10 @@ const Research: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className={`text-xl mb-6 font-medium ${
-                  theme === 'dark' ? 'text-[#8BD7BB]' : 'text-[#8BD7BB]'
+                  theme === 'dark' ? 'text-[#8BD7BB]' : 'text-gray-700'
                 }`}
               >
-                Unlock valuable insights through comprehensive market research and data analysis.
+                Unlock data-driven insights and strategic intelligence to power your business decisions and fuel growth.
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -143,7 +149,7 @@ const Research: React.FC = () => {
                   variant={theme === 'dark' ? 'primary' : 'primary'} 
                   size="lg" 
                   to="/contact"
-                  className={theme === 'dark' ? 'bg-primary-500 hover:bg-primary-600' : 'bg-primary-600 hover:bg-primary-700'}
+                  className={theme === 'dark' ? 'bg-[#8BD7BB] hover:bg-[#8BD7BB]/90' : 'bg-[#0E2A61] hover:bg-[#0E2A61]/90'}
                 >
                   Get Free Analysis
                 </Button>
@@ -154,15 +160,15 @@ const Research: React.FC = () => {
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0, y: [0, -10, 0] }}
               transition={{ duration: 3, repeat: Infinity, repeatType: 'reverse', delay: 0.5 }}
-              className="flex justify-center items-center"
+              className="flex justify-center items-center w-full"
             >
               <img
-                src="https://cdn.iconscout.com/illustration/premium/thumb/data-analysis-5693466-4753826.svg"
-                alt="Research & Analysis Illustration"
-                className={`w-full max-w-md rounded-2xl shadow-xl border ${
-                  theme === 'dark' 
-                    ? 'border-gray-700 bg-gray-800/70' 
-                    : 'border-gray-200 bg-white/70'
+                src={researchImage}
+                alt="Research Services"
+                className={`w-full max-w-2xl rounded-2xl shadow-xl border ${
+                  theme === 'dark'
+                    ? 'border-gray-700 bg-gray-800/90'
+                    : 'border-gray-200 bg-white/95'
                 }`}
               />
             </motion.div>
@@ -192,7 +198,7 @@ const Research: React.FC = () => {
           <p className="text-lg text-gray-100 mb-8 max-w-2xl mx-auto">
             Contact us today to discuss how our research services can help you stay ahead of the curve.
           </p>
-          <button className="bg-white text-primary-600 dark:text-secondary-600 hover:bg-gray-100 font-semibold py-4 px-10 rounded-lg transition-colors text-lg">
+          <button onClick={() => window.location.href = '/contact'} className="bg-white text-primary-600 dark:text-secondary-600 hover:bg-gray-100 font-semibold py-4 px-10 rounded-lg transition-colors text-lg shadow-lg hover:shadow-xl">
             Get Started
           </button>
         </div>

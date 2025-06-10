@@ -54,7 +54,7 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto"
+            className="text-xl text-gray-700 dark:text-gray-400 max-w-3xl mx-auto"
           >
             {description}
           </motion.p>

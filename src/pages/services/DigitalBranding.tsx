@@ -1,6 +1,16 @@
 import React from 'react';
 import { FaMobileAlt, FaSearch, FaLaptopCode, FaPalette, FaBullhorn, FaGoogle, FaBullseye, FaList, FaArrowRight } from 'react-icons/fa';
 import ServicePageTemplate from '../../components/templates/ServicePageTemplate';
+import { useTheme } from '../../context/ThemeContext';
+import ServiceCard from '../../components/services/ServiceCard';
+import { motion } from 'framer-motion';
+import Button from '../../components/ui/Button';
+import digitalBrandingImage from '../../assets/images/Digital Branding/digital-branding.jpg';
+
+// To manually add images, use this pattern:
+// import imageName from '../../assets/images/your-folder/image-name.extension';
+// Supported formats: .jpg, .jpeg, .png, .webp, .gif
+// Example: import myImage from '../../assets/images/services/my-image.jpg';
 
 const digitalBrandingServices = [
   { 
@@ -81,6 +91,8 @@ const features = [
 ];
 
 const DigitalBranding: React.FC = () => {
+  const theme = useTheme();
+
   return (
     <ServicePageTemplate
       title="Digital Branding"

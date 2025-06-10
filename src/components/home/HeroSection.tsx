@@ -4,46 +4,64 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Button from '../ui/Button';
 import { useTheme } from '../../context/ThemeContext';
 
+// Import images from assets
+import slider1 from '../../assets/images/Digital Branding/digital-branding.jpg';
+import slider2 from '../../assets/images/Digital Branding/tech-solutions.png';
+import slider3 from '../../assets/images/Digital Branding/graphic-design.jpg';
+import slider4 from '../../assets/images/Digital Branding/hr-solutions.jpg';
+import slider5 from '../../assets/images/Digital Branding/academy.jpeg';
+import slider6 from '../../assets/images/Digital Branding/ecommerce-support.webp';
+import slider7 from '../../assets/images/Digital Branding/research.jpg';
+import slider8 from '../../assets/images/Digital Branding/management-solutions.avif';
+
 const services = [
   {
     title: 'Digital Branding',
     description: 'Crafting compelling brand identities that resonate with your audience and drive business growth',
-    link: '/services/digital-branding'
+    link: '/services/digital-branding',
+    image: slider1
   },
   {
     title: 'Tech Solutions',
     description: 'Innovative technology solutions that transform your business operations and drive digital success',
-    link: '/services/tech-solutions'
+    link: '/services/tech-solutions',
+    image: slider2
   },
   {
     title: 'Graphics Design',
     description: 'Creative and professional design solutions that make your brand stand out in the digital landscape',
-    link: '/services/graphic-design'
+    link: '/services/graphic-design',
+    image: slider3
   },
   {
     title: 'HR Solutions',
     description: 'Comprehensive HR management and consulting services for organizational excellence and growth',
-    link: '/services/hr-solutions'
+    link: '/services/hr-solutions',
+    image: slider4
   },
   {
     title: 'Academy',
     description: 'Professional training and skill development programs for career advancement and success',
-    link: '/services/academy'
+    link: '/services/academy',
+    image: slider5
   },
   {
     title: 'Ecommerce Support',
     description: 'End-to-end ecommerce solutions and support for online business success and growth',
-    link: '/services/ecommerce-support'
+    link: '/services/ecommerce-support',
+    image: slider6
   },
   {
     title: 'Research',
     description: 'Data-driven research and market analysis for informed business decisions and strategy',
-    link: '/services/research'
+    link: '/services/research',
+    image: slider7
   },
   {
     title: 'Management Solutions',
     description: 'Strategic business management and consulting for sustainable growth and success',
-    link: '/services/management-solutions'
+    link: '/services/management-solutions',
+    image: slider8
   }
 ];
 
@@ -60,7 +78,7 @@ const HeroSection: React.FC = () => {
   }, []);
 
   return (
-    <div className={`relative min-h-screen flex flex-col justify-center ${theme === 'dark' ? 'bg-[#0A0A0A]' : 'bg-white'} overflow-hidden`}>
+    <div className={`relative min-h-screen flex flex-col justify-center ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-50'} overflow-hidden`}>
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
@@ -74,7 +92,7 @@ const HeroSection: React.FC = () => {
             ease: "linear"
           }}
           className={`absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-to-br ${
-            theme === 'dark' ? 'from-[#8BD7BB]/10' : 'from-[#0E2A61]/10'
+            theme === 'dark' ? 'from-[#8BD7BB]/10' : 'from-gray-200/10'
           } to-transparent rounded-full blur-3xl opacity-50`}
         />
         <motion.div
@@ -88,7 +106,7 @@ const HeroSection: React.FC = () => {
             ease: "linear"
           }}
           className={`absolute -bottom-1/2 -right-1/2 w-full h-full bg-gradient-to-tl ${
-            theme === 'dark' ? 'from-[#8BD7BB]/10' : 'from-[#0E2A61]/10'
+            theme === 'dark' ? 'from-[#8BD7BB]/10' : 'from-gray-200/10'
           } to-transparent rounded-full blur-3xl opacity-50`}
         />
       </div>
@@ -235,7 +253,7 @@ const HeroSection: React.FC = () => {
                     theme === 'dark' ? 'bg-[#0A0A0A]' : 'bg-white'
                   } rounded-[22px] overflow-hidden backdrop-blur-sm`}>
                     <img 
-                      src={`https://source.unsplash.com/random/1200x900?${services[currentServiceIndex].title.toLowerCase().replace(' ', ',')},business,technology,modern,professional`}
+                      src={services[currentServiceIndex].image}
                       alt={services[currentServiceIndex].title}
                       className="w-full h-full object-cover"
                     />

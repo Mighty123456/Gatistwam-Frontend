@@ -3,6 +3,12 @@ import { useTheme } from '../../context/ThemeContext';
 import ServiceCard from '../../components/services/ServiceCard';
 import Button from '../../components/ui/Button';
 import { motion } from 'framer-motion';
+import techSolutionsImage from '../../assets/images/Digital Branding/tech-solutions.png';
+
+// To manually add images, use this pattern:
+// import imageName from '../../assets/images/your-folder/image-name.extension';
+// Supported formats: .jpg, .jpeg, .png, .webp, .gif
+// Example: import myImage from '../../assets/images/services/my-image.jpg';
 
 interface ServiceDetail {
   title: string;
@@ -22,7 +28,7 @@ const techServices: ServiceDetail[] = [
       'API integration',
       'Cloud solutions'
     ],
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=400&fit=crop'
+    image: 'https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=800&h=400&fit=crop'
   },
   {
     title: 'IT Infrastructure Management',
@@ -104,7 +110,7 @@ const TechSolutions: React.FC = () => {
                   theme === 'dark' ? 'text-white' : 'text-gray-900'
                 }`}
               >
-                Social media strategy that makes your audience want to follow & engage with your brand.
+                Innovative Technology Solutions for Your Business
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -114,7 +120,7 @@ const TechSolutions: React.FC = () => {
                   theme === 'dark' ? 'text-[#8BD7BB]' : 'text-primary-600'
                 }`}
               >
-                When you build an authentic relationship with your prospects, they'll choose you without thinking twice.
+                Transform your business with cutting-edge technology solutions
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -125,13 +131,13 @@ const TechSolutions: React.FC = () => {
                 }`}
               >
                 <p>
-                  Social media is considered the second-most effective form of digital marketing, yet more than one-third of businesses have no social media presence at all. This is largely due to small businesses not having the time or resources to invest in social media marketing.
+                  Our technology solutions are designed to help businesses thrive in the digital age. We provide comprehensive software development and IT infrastructure management services that are tailored to your specific needs.
                 </p>
                 <p>
-                  Social media offers a way to directly engage with your target audience and nurture them into becoming your ideal customers. Through it, you can build an online community, expand your customer reach, boost your brand and location's reputation, and collaborate with other industry experts in a way that humanizes you and your team. Thus, helping build genuine and strong business relationships with your patrons.
+                  From custom software development to IT infrastructure optimization, our team of experts ensures that your technology systems are efficient, secure, and scalable. We work closely with you to understand your business requirements and deliver solutions that drive growth and innovation.
                 </p>
                 <p>
-                  Let TechMatrick's Social Media Management experts drive your social media efforts to help increase followers, maximize brand awareness and gain revenue. Our experienced team can turn your business vision into a cohesive social persona for your brand. As an intelligence-based digital marketing firm, we have the tools in place to allow us to find, join, and influence your company's ideal customer base. We work tirelessly to ensure that your company is always part of the best conversations and sees measurable online and revenue growth as a result of properly influencing communities.
+                  With our technology solutions, you can streamline your operations, enhance productivity, and stay ahead of the competition. Let us help you leverage the power of technology to achieve your business goals.
                 </p>
               </motion.div>
               <motion.div
@@ -143,7 +149,7 @@ const TechSolutions: React.FC = () => {
                   variant={theme === 'dark' ? 'primary' : 'primary'} 
                   size="lg" 
                   to="/contact"
-                  className={theme === 'dark' ? 'bg-primary-500 hover:bg-primary-600' : 'bg-primary-600 hover:bg-primary-700'}
+                  className={theme === 'dark' ? 'bg-[#8BD7BB] hover:bg-[#8BD7BB]/90' : 'bg-[#0E2A61] hover:bg-[#0E2A61]/90'}
                 >
                   Get Free Analysis
                 </Button>
@@ -154,12 +160,12 @@ const TechSolutions: React.FC = () => {
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0, y: [0, -10, 0] }}
               transition={{ duration: 3, repeat: Infinity, repeatType: 'reverse', delay: 0.5 }}
-              className="flex justify-center items-center"
+              className="flex justify-center items-center w-full"
             >
               <img
-                src="https://cdn.iconscout.com/illustration/premium/thumb/social-media-strategy-5693462-4753822.svg"
-                alt="Social Media Strategy Illustration"
-                className={`w-full max-w-md rounded-2xl shadow-xl border ${
+                src={techSolutionsImage}
+                alt="Technology Solutions"
+                className={`w-full max-w-2xl rounded-2xl shadow-xl border ${
                   theme === 'dark' 
                     ? 'border-gray-700 bg-gray-800/90' 
                     : 'border-gray-200 bg-white/95'
@@ -196,15 +202,13 @@ const TechSolutions: React.FC = () => {
           }`}>
             Contact us today to discuss how our technology solutions can help your business thrive in the digital age.
           </p>
-          <button
-            className={`px-8 py-3 rounded-lg font-semibold text-white transition-colors ${
-              theme === 'dark'
-                ? 'bg-secondary-500 hover:bg-secondary-600'
-                : 'bg-primary-600 hover:bg-primary-700'
-            }`}
+          <Button
+            size="lg"
+            to="/contact"
+            className={theme === 'dark' ? 'bg-[#8BD7BB] hover:bg-[#8BD7BB]/90' : 'bg-[#0E2A61] hover:bg-[#0E2A61]/90'}
           >
             Contact Us
-          </button>
+          </Button>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import { AnimationProvider } from './context/AnimationContext';
 import { Toaster } from 'react-hot-toast';
 import Layout from './components/layout/Layout';
+import WhatsAppButton from './components/WhatsAppButton';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
@@ -26,6 +27,7 @@ import GoogleAdsPPCPage from './pages/services/GoogleAdsPPCPage';
 import LeadsGenerationPage from './pages/services/LeadsGenerationPage';
 import InfluencerMarketingPage from './pages/services/InfluencerMarketingPage';
 import BlogPostPage from './pages/BlogPostPage';
+import SocialMediaAdvertisingPage from './pages/services/SocialMediaAdvertisingPage';
 
 // Admin Pages
 import AdminProjects from './pages/admin/Projects';
@@ -42,6 +44,7 @@ const App: React.FC = () => {
       <AnimationProvider>
         <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <Toaster position="top-right" />
+          <WhatsAppButton />
           <Routes>
             {/* Admin Routes */}
             <Route path="/admin/login" element={<AdminLogin />} />
@@ -100,6 +103,7 @@ const App: React.FC = () => {
             <Route path="/services/digital-branding/google-ads-ppc" element={<Layout><GoogleAdsPPCPage /></Layout>} />
             <Route path="/services/digital-branding/leads-generation" element={<Layout><LeadsGenerationPage /></Layout>} />
             <Route path="/services/digital-branding/influencer-marketing" element={<Layout><InfluencerMarketingPage /></Layout>} />
+            <Route path="/services/digital-branding/social-media-advertising" element={<Layout><SocialMediaAdvertisingPage /></Layout>} />
           </Routes>
         </Router>
       </AnimationProvider>

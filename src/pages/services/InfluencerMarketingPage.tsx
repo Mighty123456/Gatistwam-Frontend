@@ -1,6 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../../context/ThemeContext';
+import { motion } from 'framer-motion';
+import Button from '../../components/ui/Button';
+
+// To manually add images, use this pattern:
+// import imageName from '../../assets/images/your-folder/image-name.extension';
+// Supported formats: .jpg, .jpeg, .png, .webp, .gif
+// Example: import myImage from '../../assets/images/services/my-image.jpg';
 
 const InfluencerMarketingPage: React.FC = () => {
   const { theme } = useTheme();
@@ -28,6 +35,17 @@ const InfluencerMarketingPage: React.FC = () => {
              <li>Performance Tracking & Reporting</li>
              <li>Negotiation & Relationship Management</li>
            </ul>
+        </div>
+
+        <div className="mt-12 text-center">
+          <Button
+            variant="primary"
+            size="lg"
+            to="/contact"
+            className="bg-white text-white dark:text-white hover:bg-gray-100 font-semibold py-4 px-10 rounded-lg transition-colors text-lg shadow-lg hover:shadow-xl"
+          >
+            Get a proposal
+          </Button>
         </div>
 
       </div>

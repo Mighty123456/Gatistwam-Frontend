@@ -44,7 +44,12 @@ export default {
         'slide-down': 'slideDown 0.5s ease-in-out',
         'slide-left': 'slideLeft 0.5s ease-in-out',
         'slide-right': 'slideRight 0.5s ease-in-out',
-        'bounce-slow': 'bounce 3s infinite',
+        'spin-slow': 'spin 3s linear infinite',
+        'bounce-slow': 'bounce 1.5s infinite',
+        'pulse-slow': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'gradient-x': 'gradient-x 3s ease infinite',
+        'gradient-y': 'gradient-y 3s ease infinite',
+        'gradient-xy': 'gradient-xy 3s ease infinite',
       },
       keyframes: {
         fadeIn: {
@@ -67,9 +72,53 @@ export default {
           '0%': { transform: 'translateX(-20px)', opacity: '0' },
           '100%': { transform: 'translateX(0)', opacity: '1' },
         },
+        'gradient-y': {
+          '0%, 100%': {
+            'background-size': '400% 400%',
+            'background-position': 'center top'
+          },
+          '50%': {
+            'background-size': '200% 200%',
+            'background-position': 'center center'
+          }
+        },
+        'gradient-x': {
+          '0%, 100%': {
+            'background-size': '200% 200%',
+            'background-position': 'left center'
+          },
+          '50%': {
+            'background-size': '200% 200%',
+            'background-position': 'right center'
+          }
+        },
+        'gradient-xy': {
+          '0%, 100%': {
+            'background-size': '400% 400%',
+            'background-position': 'left center'
+          },
+          '50%': {
+            'background-size': '200% 200%',
+            'background-position': 'right center'
+          }
+        },
+        bounce: {
+          '0%, 100%': {
+            transform: 'translateY(-25%)',
+            animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)',
+          },
+          '50%': {
+            transform: 'translateY(0)',
+            animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)',
+          },
+        },
       },
       backdropBlur: {
         xs: '2px',
+      },
+      transitionDuration: {
+        '2000': '2000ms',
+        '3000': '3000ms',
       },
     },
   },

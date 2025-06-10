@@ -3,6 +3,12 @@ import { useTheme } from '../../context/ThemeContext';
 import ServiceCard from '../../components/services/ServiceCard';
 import Button from '../../components/ui/Button';
 import { motion } from 'framer-motion';
+import hrSolutionsImage from '../../assets/images/Digital Branding/hr-solutions.jpg';
+
+// To manually add images, use this pattern:
+// import imageName from '../../assets/images/your-folder/image-name.extension';
+// Supported formats: .jpg, .jpeg, .png, .webp, .gif
+// Example: import myImage from '../../assets/images/services/my-image.jpg';
 
 interface ServiceDetail {
   title: string;
@@ -12,6 +18,30 @@ interface ServiceDetail {
 }
 
 const hrServices: ServiceDetail[] = [
+  {
+    title: 'HR Consulting',
+    description: 'Expert HR consulting services to help you optimize your workforce, improve employee engagement, and drive organizational success.',
+    benefits: [
+      'HR strategy development',
+      'Policy development',
+      'Compliance management',
+      'Performance management',
+      'Employee relations'
+    ],
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop'
+  },
+  {
+    title: 'Talent Management',
+    description: 'Comprehensive talent management solutions to attract, develop, and retain top talent in your organization.',
+    benefits: [
+      'Recruitment and selection',
+      'Training and development',
+      'Succession planning',
+      'Career development',
+      'Employee retention'
+    ],
+    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=400&fit=crop'
+  },
   {
     title: 'Entrepreneurship Development',
     description: 'Empower aspiring entrepreneurs with the knowledge and skills needed to build successful businesses. Our comprehensive training programs cover all aspects of business development and management.',
@@ -159,10 +189,10 @@ const HRSolutions: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className={`text-xl mb-6 font-medium ${
-                  theme === 'dark' ? 'text-[#8BD7BB]' : 'text-primary-600'
+                  theme === 'dark' ? 'text-[#8BD7BB]' : 'text-gray-700'
                 }`}
               >
-                Empower your workforce with expert HR solutions and comprehensive training programs.
+                Empowering your workforce and fostering a thriving organizational culture through strategic HR solutions.
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -191,7 +221,7 @@ const HRSolutions: React.FC = () => {
                   variant={theme === 'dark' ? 'primary' : 'primary'} 
                   size="lg" 
                   to="/contact"
-                  className={theme === 'dark' ? 'bg-primary-500 hover:bg-primary-600' : 'bg-primary-600 hover:bg-primary-700'}
+                  className={theme === 'dark' ? 'bg-[#8BD7BB] hover:bg-[#8BD7BB]/90' : 'bg-[#0E2A61] hover:bg-[#0E2A61]/90'}
                 >
                   Get Free Analysis
                 </Button>
@@ -202,14 +232,14 @@ const HRSolutions: React.FC = () => {
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0, y: [0, -10, 0] }}
               transition={{ duration: 3, repeat: Infinity, repeatType: 'reverse', delay: 0.5 }}
-              className="flex justify-center items-center"
+              className="flex justify-center items-center w-full"
             >
               <img
-                src="https://cdn.iconscout.com/illustration/premium/thumb/human-resources-management-5693463-4753823.svg"
-                alt="HR Solutions Illustration"
-                className={`w-full max-w-md rounded-2xl shadow-xl border ${
-                  theme === 'dark' 
-                    ? 'border-gray-700 bg-gray-800/90' 
+                src={hrSolutionsImage}
+                alt="HR Solutions Services"
+                className={`w-full max-w-2xl rounded-2xl shadow-xl border ${
+                  theme === 'dark'
+                    ? 'border-gray-700 bg-gray-800/90'
                     : 'border-gray-200 bg-white/95'
                 }`}
               />
@@ -240,7 +270,7 @@ const HRSolutions: React.FC = () => {
           <p className="text-lg text-gray-100 mb-8 max-w-2xl mx-auto">
             Contact us today to discuss how our HR solutions and training programs can help your organization thrive.
           </p>
-          <button className="bg-white text-primary-600 dark:text-secondary-600 hover:bg-gray-100 font-semibold py-4 px-10 rounded-lg transition-colors text-lg">
+          <button onClick={() => window.location.href = '/contact'} className="bg-white text-primary-600 dark:text-secondary-600 hover:bg-gray-100 font-semibold py-4 px-10 rounded-lg transition-colors text-lg shadow-lg hover:shadow-xl">
             Get Started
           </button>
         </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import { useTheme } from '../../context/ThemeContext';
 
 const faqs = [
   {
@@ -27,6 +28,7 @@ const faqs = [
 
 const FaqSection: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const { theme } = useTheme();
 
   const toggleFaq = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -41,9 +43,9 @@ const FaqSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold mb-4"
+            className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white"
           >
-            Popular <span className="text-primary-500 dark:text-secondary-500">Questions</span>
+            Popular <span className="text-primary-500 dark:text-[#8BD7BB]">Questions</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -68,14 +70,23 @@ const FaqSection: React.FC = () => {
             >
               <button
                 onClick={() => toggleFaq(index)}
-                className="w-full flex items-center justify-between p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                className="w-full flex items-center justify-between p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
               >
-                <h3 className="text-lg font-semibold text-left">{faq.question}</h3>
-                <ChevronDown
-                  className={`w-5 h-5 text-primary-500 transition-transform ${
-                    openIndex === index ? 'transform rotate-180' : ''
-                  }`}
-                />
+                <h3 className="text-lg font-semibold text-left text-gray-900 dark:text-white">{faq.question}</h3>
+                <motion.div
+                  animate={{ rotate: openIndex === index ? 180 : 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                >
+                  <ChevronDown
+                    className={`w-5 h-5 transition-colors duration-300 ${
+                      openIndex === index
+                        ? 'text-primary-500 dark:text-[#8BD7BB]'
+                        : theme === 'light'
+                        ? 'text-gray-500'
+                        : 'text-gray-400'
+                    }`}
+                  />
+                </motion.div>
               </button>
               <AnimatePresence>
                 {openIndex === index && (
@@ -83,10 +94,10 @@ const FaqSection: React.FC = () => {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="p-6 bg-white dark:bg-gray-800 rounded-b-lg shadow-sm">
+                    <div className="p-6 bg-white dark:bg-gray-800 rounded-b-lg shadow-sm border-t border-gray-100 dark:border-gray-700">
                       <p className="text-gray-600 dark:text-gray-300">{faq.answer}</p>
                     </div>
                   </motion.div>

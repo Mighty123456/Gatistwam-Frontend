@@ -3,6 +3,12 @@ import { useTheme } from '../../context/ThemeContext';
 import ServiceCard from '../../components/services/ServiceCard';
 import Button from '../../components/ui/Button';
 import { motion } from 'framer-motion';
+import ecommerceSupportImage from '../../assets/images/Digital Branding/ecommerce-support.webp';
+
+// To manually add images, use this pattern:
+// import imageName from '../../assets/images/your-folder/image-name.extension';
+// Supported formats: .jpg, .jpeg, .png, .webp, .gif
+// Example: import myImage from '../../assets/images/services/my-image.jpg';
 
 interface ServiceDetail {
   title: string;
@@ -13,26 +19,26 @@ interface ServiceDetail {
 
 const ecommerceServices: ServiceDetail[] = [
   {
-    title: 'E-commerce Platform Development',
-    description: 'Build robust and scalable e-commerce platforms tailored to your business needs. From online stores to marketplaces, we create solutions that drive sales and growth.',
+    title: 'E-commerce Development',
+    description: 'Build and optimize your online store with our comprehensive e-commerce development services.',
     benefits: [
-      'Custom e-commerce development',
-      'Shopping cart integration',
+      'Custom store development',
+      'Platform integration',
       'Payment gateway setup',
-      'Inventory management',
-      'Order processing system'
+      'Mobile optimization',
+      'Security implementation'
     ],
     image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=400&fit=crop'
   },
   {
-    title: 'E-commerce Optimization',
-    description: 'Optimize your online store for better performance and higher conversion rates. We help you enhance user experience and maximize sales potential.',
+    title: 'E-commerce Management',
+    description: 'Professional management services to help you run and grow your online business effectively.',
     benefits: [
-      'Conversion rate optimization',
-      'User experience enhancement',
-      'Mobile responsiveness',
-      'Performance optimization',
-      'SEO implementation'
+      'Inventory management',
+      'Order processing',
+      'Customer service',
+      'Analytics and reporting',
+      'Marketing support'
     ],
     image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=400&fit=crop'
   }
@@ -111,10 +117,10 @@ const EcommerceSupport: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className={`text-xl mb-6 font-medium ${
-                  theme === 'dark' ? 'text-[#8BD7BB]' : 'text-primary-600'
+                  theme === 'dark' ? 'text-[#8BD7BB]' : 'text-gray-700'
                 }`}
               >
-                Transform your online store into a powerful sales engine with our comprehensive e-commerce solutions.
+                Boost your online business with our comprehensive e-commerce solutions and expert support.
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -143,7 +149,7 @@ const EcommerceSupport: React.FC = () => {
                   variant={theme === 'dark' ? 'primary' : 'primary'} 
                   size="lg" 
                   to="/contact"
-                  className={theme === 'dark' ? 'bg-primary-500 hover:bg-primary-600' : 'bg-primary-600 hover:bg-primary-700'}
+                  className={theme === 'dark' ? 'bg-[#8BD7BB] hover:bg-[#8BD7BB]/90' : 'bg-[#0E2A61] hover:bg-[#0E2A61]/90'}
                 >
                   Get Free Analysis
                 </Button>
@@ -154,14 +160,14 @@ const EcommerceSupport: React.FC = () => {
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0, y: [0, -10, 0] }}
               transition={{ duration: 3, repeat: Infinity, repeatType: 'reverse', delay: 0.5 }}
-              className="flex justify-center items-center"
+              className="flex justify-center items-center w-full"
             >
               <img
-                src="https://cdn.iconscout.com/illustration/premium/thumb/ecommerce-shopping-5693464-4753824.svg"
-                alt="E-commerce Support Illustration"
-                className={`w-full max-w-md rounded-2xl shadow-xl border ${
-                  theme === 'dark' 
-                    ? 'border-gray-700 bg-gray-800/90' 
+                src={ecommerceSupportImage}
+                alt="Ecommerce Support Services"
+                className={`w-full max-w-2xl rounded-2xl shadow-xl border ${
+                  theme === 'dark'
+                    ? 'border-gray-700 bg-gray-800/90'
                     : 'border-gray-200 bg-white/95'
                 }`}
               />
@@ -192,7 +198,7 @@ const EcommerceSupport: React.FC = () => {
           <p className="text-lg text-gray-100 mb-8 max-w-2xl mx-auto">
             Contact us today to discuss how our e-commerce support services can help your business grow.
           </p>
-          <button className="bg-white text-primary-600 dark:text-secondary-600 hover:bg-gray-100 font-semibold py-4 px-10 rounded-lg transition-colors text-lg">
+          <button onClick={() => window.location.href = '/contact'} className="bg-white text-primary-600 dark:text-secondary-600 hover:bg-gray-100 font-semibold py-4 px-10 rounded-lg transition-colors text-lg shadow-lg hover:shadow-xl">
             Get Started
           </button>
         </div>

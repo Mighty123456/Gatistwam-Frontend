@@ -107,6 +107,43 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
+      {/* Video Section */}
+      <section className="bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 py-20">
+        <div className="container-custom">
+          <AnimatedElement>
+            <div className="text-center mb-12">
+              <h2 className="text-5xl font-bold mb-8">
+                <span className={theme === 'light' ? 'text-gray-900' : 'text-white'}>Watch Our </span>
+                <span className={theme === 'light' ? 'text-primary-500' : 'text-[#8BD7BB]'}>Story</span>
+              </h2>
+              <p className={`text-xl max-w-4xl mx-auto ${
+                theme === 'light' ? 'text-gray-700' : 'text-gray-300'
+              }`}>
+                Discover how we're transforming businesses through innovation and technology
+              </p>
+            </div>
+            
+            <div className="relative max-w-4xl mx-auto">
+              <div className="aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden shadow-2xl">
+                <video
+                  className="w-full h-full object-cover"
+                  controls
+                  poster="/path-to-your-thumbnail.jpg" // Optional: Add a poster image
+                >
+                  <source src="/src/assets/videos/my-video.mp4" type="video/mp4" />
+                  <source src="/src/assets/videos/your-video.webm" type="video/webm" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              
+              {/* Decorative Elements */}
+              <div className="absolute -top-4 -left-4 w-24 h-24 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 rounded-full blur-2xl" />
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 rounded-full blur-2xl" />
+            </div>
+          </AnimatedElement>
+        </div>
+      </section>
+
       {/* Our Mission Section */}
       <section className="bg-white dark:bg-gray-900 py-12">
         <div className="container-custom">

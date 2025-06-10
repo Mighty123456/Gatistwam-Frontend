@@ -128,14 +128,14 @@ const PortfolioPage: React.FC = () => {
       {/* Projects Grid */}
       <section className="py-20">
         <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
             {filteredProjects.map((project, index) => (
               <motion.div
                 key={project._id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+                className="group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 max-w-sm mx-auto w-full"
                 onClick={() => handleProjectClick(project)}
               >
                 <div className="relative aspect-[4/3] w-full">

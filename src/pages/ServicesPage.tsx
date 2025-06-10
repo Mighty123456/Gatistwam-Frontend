@@ -125,14 +125,11 @@ const ServicesPage: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-800 dark:text-gray-200 py-20">
       <div className="container-custom mx-auto px-4">
         <div className="text-center mb-16">
-          <h1 className={`text-6xl font-bold mb-6 px-4 py-2 ${
-            theme === 'light' 
-              ? 'text-primary-500' 
-              : 'text-secondary-500'
-          }`}>
-            Our Services
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            <span className={theme === 'dark' ? 'text-white' : 'text-primary-900'}>Our</span>{' '}
+            <span className={theme === 'dark' ? 'text-secondary-500' : 'text-primary-500'}>Services</span>
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Discover our comprehensive range of professional services designed to help your business thrive
           </p>
         </div>
