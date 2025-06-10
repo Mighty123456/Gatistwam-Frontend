@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Logo from './ui/Logo';
 
 const Loading: React.FC = () => {
   const [progress, setProgress] = useState(0);
@@ -40,10 +41,9 @@ const Loading: React.FC = () => {
           
           {/* Logo container */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <img 
-              src="/images/logo-light.png" 
-              alt="Gatistwam Logo" 
-              className={`w-16 h-16 transition-all duration-300 ${
+            <Logo 
+              size="md"
+              className={`transition-all duration-300 ${
                 isHovered ? 'animate-bounce-slow' : 'animate-pulse'
               }`}
             />
