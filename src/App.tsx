@@ -73,6 +73,11 @@ const App: React.FC = () => {
                 <PortfolioManagement />
               </ProtectedRoute>
             } />
+            <Route path="/portfolio/admin" element={
+              <ProtectedRoute>
+                <PortfolioManagement />
+              </ProtectedRoute>
+            } />
             <Route path="/admin/blog" element={
               <ProtectedRoute>
                 <BlogManagement />
