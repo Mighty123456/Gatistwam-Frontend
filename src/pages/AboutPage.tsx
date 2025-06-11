@@ -124,21 +124,63 @@ const AboutPage: React.FC = () => {
             </div>
             
             <div className="relative max-w-4xl mx-auto">
-              <div className="aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden shadow-2xl">
-                <video
-                  className="w-full h-full object-cover"
-                  controls
-                  poster="/path-to-your-thumbnail.jpg" // Optional: Add a poster image
-                >
-                  <source src="/src/assets/videos/my-video.mp4" type="video/mp4" />
-                  <source src="/src/assets/videos/your-video.webm" type="video/webm" />
-                  Your browser does not support the video tag.
-                </video>
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
+                {/* Decorative border gradient */}
+                <div className="absolute inset-0 bg-gradient-to-r from-primary-500/20 via-secondary-500/20 to-primary-500/20 animate-gradient-x" />
+                
+                {/* Video container with glass effect */}
+                <div className="relative bg-white/10 backdrop-blur-sm p-1 rounded-3xl">
+                  <div className="aspect-w-16 aspect-h-9">
+                    <video
+                      className="w-full h-full object-cover rounded-2xl"
+                      controls
+                      preload="metadata"
+                      playsInline
+                      controlsList="nodownload"
+                      onError={(e) => {
+                        console.error('Video error:', e);
+                        const videoElement = e.target as HTMLVideoElement;
+                        videoElement.style.display = 'none';
+                        const container = videoElement.parentElement;
+                        if (container) {
+                          container.innerHTML = `
+                            <div class="flex items-center justify-center h-full bg-gray-100 dark:bg-gray-800 rounded-2xl">
+                              <p class="text-red-500">Failed to load video. Please try refreshing the page.</p>
+                            </div>
+                          `;
+                        }
+                      }}
+                    >
+                      <source src="/videos/my-video.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                </div>
+
+                {/* Decorative elements */}
+                <div className="absolute -top-6 -left-6 w-32 h-32 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 rounded-full blur-2xl animate-pulse" />
+                <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-tl from-primary-500/20 to-secondary-500/20 rounded-full blur-2xl animate-pulse" />
               </div>
-              
-              {/* Decorative Elements */}
-              <div className="absolute -top-4 -left-4 w-24 h-24 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 rounded-full blur-2xl" />
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 rounded-full blur-2xl" />
+
+              {/* Video controls styling */}
+              <style>{`
+                video::-webkit-media-controls {
+                  background-color: rgba(0, 0, 0, 0.5);
+                  border-radius: 0 0 1rem 1rem;
+                }
+                video::-webkit-media-controls-panel {
+                  padding: 0 1rem;
+                }
+                @keyframes gradient-x {
+                  0% { background-position: 0% 50%; }
+                  50% { background-position: 100% 50%; }
+                  100% { background-position: 0% 50%; }
+                }
+                .animate-gradient-x {
+                  animation: gradient-x 15s ease infinite;
+                  background-size: 200% 200%;
+                }
+              `}</style>
             </div>
           </AnimatedElement>
         </div>
