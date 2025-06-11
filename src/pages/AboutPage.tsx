@@ -171,6 +171,31 @@ const AboutPage: React.FC = () => {
                 video::-webkit-media-controls-panel {
                   padding: 0 1rem;
                 }
+                video::-webkit-media-controls-fullscreen-button {
+                  background-color: transparent;
+                  border: none;
+                  cursor: pointer;
+                  padding: 0.5rem;
+                  margin: 0 0.5rem;
+                  border-radius: 0.25rem;
+                  transition: background-color 0.2s;
+                }
+                video::-webkit-media-controls-fullscreen-button:hover {
+                  background-color: rgba(255, 255, 255, 0.1);
+                }
+                video::-webkit-media-controls-fullscreen-button:active {
+                  background-color: rgba(255, 255, 255, 0.2);
+                }
+                video:fullscreen {
+                  background-color: black;
+                  width: 100vw;
+                  height: 100vh;
+                  object-fit: contain;
+                }
+                video:fullscreen::-webkit-media-controls {
+                  background-color: rgba(0, 0, 0, 0.7);
+                  border-radius: 0;
+                }
                 @keyframes gradient-x {
                   0% { background-position: 0% 50%; }
                   50% { background-position: 100% 50%; }
