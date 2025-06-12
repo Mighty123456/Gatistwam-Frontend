@@ -70,8 +70,8 @@ const Navbar: React.FC = () => {
   return (
     <>
       <nav className={navbarClasses}>
-        <div className="container-custom">
-          <div className="flex items-center justify-between">
+        <div className="max-w-screen-xl w-full mx-auto px-4">
+          <div className="flex items-center justify-between min-w-0">
             {/* Logo */}
             <NavLink to="/" className="flex items-center">
               <Logo size="lg" />

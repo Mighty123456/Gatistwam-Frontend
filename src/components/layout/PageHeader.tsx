@@ -19,7 +19,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
         backgroundImage: `linear-gradient(rgba(14, 42, 97, 0.85), rgba(14, 42, 97, 0.85)), url(${bgImage})`
       }}
     >
-      <div className="container-custom text-center relative z-10">
+      <div className="max-w-screen-xl w-full mx-auto px-4 text-center relative z-10 min-w-0">
         <motion.h1 
           className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4"
           initial={{ opacity: 0, y: 20 }}
