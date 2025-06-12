@@ -112,10 +112,10 @@ const HeroSection: React.FC = () => {
       </div>
       
       {/* Content */}
-      <div className="container-custom relative z-10 pt-20 pb-20 md:pt-0 md:pb-0">
+      <div className="container-custom relative z-10 pt-20 pb-32 md:pt-0 md:pb-0">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           {/* Left content */}
-          <div className={theme === 'dark' ? 'text-white' : 'text-gray-900'}>
+          <div className={`${theme === 'dark' ? 'text-white' : 'text-gray-900'} order-1 lg:order-none`}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -149,7 +149,7 @@ const HeroSection: React.FC = () => {
 
                   {/* Service Title */}
                   <motion.h1
-                    className={`text-6xl md:text-7xl lg:text-8xl font-bold mb-8 ${
+                    className={`text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-4 sm:mb-8 ${
                       theme === 'dark' ? 'text-[#8BD7BB]' : 'text-[#0E2A61]'
                     } leading-[1.1] tracking-tight`}
                   >
@@ -161,12 +161,12 @@ const HeroSection: React.FC = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
-                    className="flex items-center gap-4 mb-12"
+                    className="flex items-center gap-4 mb-6 sm:mb-12"
                   >
-                    <div className={`h-px w-16 bg-gradient-to-r ${
+                    <div className={`h-px w-12 sm:w-16 bg-gradient-to-r ${
                       theme === 'dark' ? 'from-[#8BD7BB]/20' : 'from-[#0E2A61]/20'
                     } to-transparent`} />
-                    <span className={`text-2xl font-medium ${
+                    <span className={`text-xl sm:text-2xl font-medium ${
                       theme === 'dark' ? 'text-[#8BD7BB]/60' : 'text-[#0E2A61]/60'
                     }`}>Solutions</span>
                   </motion.div>
@@ -178,20 +178,21 @@ const HeroSection: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="mb-12"
+              className="mb-8 sm:mb-12"
             >
-              <p className={`text-xl ${
+              <p className={`text-lg sm:text-xl ${
                 theme === 'dark' ? 'text-white/70' : 'text-gray-700'
               } leading-relaxed max-w-xl font-light`}>
                 {services[currentServiceIndex].description}
               </p>
             </motion.div>
             
+            {/* Buttons - Hidden on mobile, shown on desktop */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex flex-wrap gap-6"
+              className="hidden lg:flex flex-wrap gap-6"
             >
               <Button 
                 variant="primary" 
@@ -234,7 +235,7 @@ const HeroSection: React.FC = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="hidden lg:block relative"
+            className="relative mt-8 sm:mt-0 order-2 lg:order-none"
           >
             <div className="relative">
               <motion.div
@@ -246,12 +247,12 @@ const HeroSection: React.FC = () => {
                 className="relative"
               >
                 {/* Main Image Container */}
-                <div className={`w-full aspect-[4/3] rounded-3xl overflow-hidden ${
+                <div className={`w-full aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden ${
                   theme === 'dark' ? 'bg-[#8BD7BB]/20' : 'bg-[#0E2A61]/20'
-                } p-[2px] shadow-2xl`}>
+                } p-[2px] shadow-xl sm:shadow-2xl`}>
                   <div className={`w-full h-full ${
                     theme === 'dark' ? 'bg-[#0A0A0A]' : 'bg-white'
-                  } rounded-[22px] overflow-hidden backdrop-blur-sm`}>
+                  } rounded-[18px] sm:rounded-[22px] overflow-hidden backdrop-blur-sm`}>
                     <img 
                       src={services[currentServiceIndex].image}
                       alt={services[currentServiceIndex].title}
@@ -274,11 +275,53 @@ const HeroSection: React.FC = () => {
             </div>
           </motion.div>
         </div>
+
+        {/* Buttons - Shown on mobile, hidden on desktop */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="flex lg:hidden flex-col gap-4 mt-8"
+        >
+          <Button 
+            variant="primary" 
+            to={services[currentServiceIndex].link}
+            size="lg"
+            className={`group relative overflow-hidden w-full ${
+              theme === 'dark' ? 'bg-[#8BD7BB] hover:bg-[#8BD7BB]/90' : 'bg-[#0E2A61] hover:bg-[#0E2A61]/90'
+            } transition-all duration-300`}
+          >
+            <span className="relative z-10 flex items-center justify-center gap-2 text-white">
+              Explore Service
+              <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+            </span>
+            <motion.div
+              className="absolute inset-0 bg-white/10"
+              initial={{ x: '-100%' }}
+              whileHover={{ x: '100%' }}
+              transition={{ duration: 0.5 }}
+            />
+          </Button>
+          <Button 
+            variant="outline" 
+            to="/contact"
+            size="lg"
+            className={`group relative overflow-hidden w-full ${
+              theme === 'dark' 
+                ? 'border-[#8BD7BB]/20 text-[#8BD7BB] hover:bg-[#8BD7BB]/5' 
+                : 'border-[#0E2A61]/20 text-[#0E2A61] hover:bg-[#0E2A61]/5'
+            } backdrop-blur-sm`}
+            icon={<ArrowRight className="transition-transform group-hover:translate-x-1" />}
+            iconPosition="right"
+          >
+            Get Started
+          </Button>
+        </motion.div>
       </div>
       
       {/* Scroll indicator */}
       <motion.div 
-        className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center ${
+        className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-20 ${
           theme === 'dark' ? 'text-[#8BD7BB]/40' : 'text-[#0E2A61]/40'
         }`}
         initial={{ opacity: 0 }}

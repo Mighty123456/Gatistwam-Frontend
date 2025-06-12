@@ -31,6 +31,14 @@ const BrandsSection: React.FC = () => {
     dragFree: true,
     containScroll: 'trimSnaps',
     slidesToScroll: 1,
+    breakpoints: {
+      '(max-width: 640px)': { 
+        slidesToScroll: 1,
+        containScroll: 'trimSnaps',
+        dragFree: true,
+        align: 'start'
+      }
+    }
   });
 
   const controls = useAnimation();
@@ -45,6 +53,7 @@ const BrandsSection: React.FC = () => {
 
     let autoplayInterval: number;
     let isScrolling = true;
+    let isMobile = window.innerWidth <= 640;
 
     const startAutoplay = () => {
       if (autoplayInterval) return;
@@ -53,7 +62,7 @@ const BrandsSection: React.FC = () => {
         if (isScrolling) {
           emblaApi.scrollNext();
         }
-      }, 3000); // Slowed down for better visibility
+      }, isMobile ? 4000 : 3000); // Slower scroll on mobile
     };
 
     const stopAutoplay = () => {
@@ -69,17 +78,24 @@ const BrandsSection: React.FC = () => {
       startAutoplay();
     };
 
+    const handleResize = () => {
+      isMobile = window.innerWidth <= 640;
+      stopAutoplay();
+      startAutoplay();
+    };
+
     startAutoplay();
 
     const container = emblaApi.containerNode();
     container.addEventListener('mouseenter', stopAutoplay);
     container.addEventListener('mouseleave', resumeAutoplay);
+    window.addEventListener('resize', handleResize);
 
     // Start floating animation
     controls.start({
       y: [0, -10, 0],
       transition: {
-        duration: 4,
+        duration: isMobile ? 3 : 4,
         repeat: Infinity,
         ease: "easeInOut"
       }
@@ -89,6 +105,7 @@ const BrandsSection: React.FC = () => {
       stopAutoplay();
       container.removeEventListener('mouseenter', stopAutoplay);
       container.removeEventListener('mouseleave', resumeAutoplay);
+      window.removeEventListener('resize', handleResize);
     };
   }, [emblaApi, controls]);
 
@@ -131,11 +148,11 @@ const BrandsSection: React.FC = () => {
 
       <div className="container-custom relative">
         <motion.div 
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ 
-            duration: 0.8,
+            duration: 1,
             type: "spring",
             stiffness: 100
           }}
@@ -146,7 +163,7 @@ const BrandsSection: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ 
-              duration: 0.6,
+              duration: 0.8,
               delay: 0.2,
               type: "spring",
               stiffness: 200
@@ -158,8 +175,8 @@ const BrandsSection: React.FC = () => {
         </motion.div>
 
         <div className="relative group">
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex items-center justify-center gap-12">
+          <div className="overflow-hidden touch-pan-y" ref={emblaRef}>
+            <div className="flex items-center justify-center gap-4 sm:gap-12">
               <AnimatePresence>
                 {brands.map((brandImage, index) => (
                   <motion.div
@@ -169,16 +186,16 @@ const BrandsSection: React.FC = () => {
                     exit={{ opacity: 0, scale: 0.8, x: 100, rotate: 5 }}
                     transition={{ 
                       duration: 0.8,
-                      delay: index * 0.15,
+                      delay: index * 0.2,
                       type: "spring",
                       stiffness: 100,
                       damping: 15
                     }}
                     viewport={{ once: true }}
-                    className="flex-[0_0_200px] min-w-0 px-4"
+                    className="flex-[0_0_150px] sm:flex-[0_0_200px] min-w-0 px-2 sm:px-4"
                     whileHover={{
                       scale: 1.05,
-                      transition: { duration: 0.2 }
+                      transition: { duration: 0.3 }
                     }}
                   >
                     <div className="group relative">
@@ -186,12 +203,12 @@ const BrandsSection: React.FC = () => {
                         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent dark:via-white/5 rounded-lg"
                         initial={{ opacity: 0 }}
                         whileHover={{ opacity: 1 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.5 }}
                       />
                       <motion.img
                         src={brandImage}
                         alt="Brand Logo"
-                        className={`w-full h-16 object-contain transition-all duration-500 relative z-10 ${
+                        className={`w-full h-12 sm:h-16 object-contain transition-all duration-500 relative z-10 ${
                           theme === 'dark' 
                             ? 'brightness-100 contrast-100 invert-0 opacity-100' 
                             : 'opacity-60 group-hover:opacity-100'
@@ -203,13 +220,13 @@ const BrandsSection: React.FC = () => {
                             type: "spring",
                             stiffness: 400,
                             damping: 10,
-                            duration: 0.6
+                            duration: 0.8
                           }
                         }}
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ 
-                          duration: 0.6,
+                          duration: 0.8,
                           delay: index * 0.2,
                           type: "spring",
                           stiffness: 200
@@ -220,7 +237,7 @@ const BrandsSection: React.FC = () => {
                         initial={{ width: 0 }}
                         whileHover={{ 
                           width: "80%",
-                          transition: { duration: 0.3 }
+                          transition: { duration: 0.5 }
                         }}
                       />
                     </div>
@@ -232,33 +249,33 @@ const BrandsSection: React.FC = () => {
 
           <motion.button
             onClick={scrollPrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 bg-white dark:bg-gray-700 p-2 rounded-full shadow-lg hover:bg-primary-500 dark:hover:bg-[#8BD7BB] hover:text-white dark:hover:text-gray-900 transition-all duration-300 z-10 opacity-0 group-hover:opacity-100"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 bg-white dark:bg-gray-700 p-1.5 sm:p-2 rounded-full shadow-lg hover:bg-primary-500 dark:hover:bg-[#8BD7BB] hover:text-white dark:hover:text-gray-900 transition-all duration-300 z-10 opacity-0 group-hover:opacity-100"
             whileHover={{ 
               scale: 1.2,
               rotate: -10,
-              transition: { type: "spring", stiffness: 400 }
+              transition: { type: "spring", stiffness: 400, duration: 0.5 }
             }}
             whileTap={{ scale: 0.9 }}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.8 }}
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={20} className="sm:w-6 sm:h-6" />
           </motion.button>
           <motion.button
             onClick={scrollNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 bg-white dark:bg-gray-700 p-2 rounded-full shadow-lg hover:bg-primary-500 dark:hover:bg-[#8BD7BB] hover:text-white dark:hover:text-gray-900 transition-all duration-300 z-10 opacity-0 group-hover:opacity-100"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 bg-white dark:bg-gray-700 p-1.5 sm:p-2 rounded-full shadow-lg hover:bg-primary-500 dark:hover:bg-[#8BD7BB] hover:text-white dark:hover:text-gray-900 transition-all duration-300 z-10 opacity-0 group-hover:opacity-100"
             whileHover={{ 
               scale: 1.2,
               rotate: 10,
-              transition: { type: "spring", stiffness: 400 }
+              transition: { type: "spring", stiffness: 400, duration: 0.5 }
             }}
             whileTap={{ scale: 0.9 }}
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.8 }}
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={20} className="sm:w-6 sm:h-6" />
           </motion.button>
         </div>
       </div>
