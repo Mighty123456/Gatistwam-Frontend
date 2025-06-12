@@ -67,7 +67,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                     </h3>
                     <div className="space-y-2 text-gray-600 dark:text-gray-400">
                       <p>Email: thegatistwam@gmail.com</p>
-                      <p>Phone: +91 9106110380</p>
+                      <p>Phone: +91 9274524365</p>
                       <p>Address: Shrimat Arcade, 01, Anand - Sojitra Rd, Nand Tanuj Society, Karamsad, Anand, Gujarat 388121</p>
                     </div>
                   </div>
