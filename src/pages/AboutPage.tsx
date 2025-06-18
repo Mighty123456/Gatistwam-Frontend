@@ -132,7 +132,7 @@ const AboutPage: React.FC = () => {
                 <div className="relative bg-white/10 backdrop-blur-sm p-1 rounded-3xl">
                   <div className="aspect-w-16 aspect-h-9">
                     <video
-                      className="w-full h-full object-cover rounded-2xl"
+                      className="w-full h-full object-cover rounded-2xl filter brightness-125"
                       controls
                       preload="metadata"
                       playsInline
@@ -164,27 +164,48 @@ const AboutPage: React.FC = () => {
 
               {/* Video controls styling */}
               <style>{`
+                video {
+                  filter: brightness(1.25);
+                }
                 video::-webkit-media-controls {
                   background-color: rgba(0, 0, 0, 0.5);
                   border-radius: 0 0 1rem 1rem;
+                  opacity: 0;
+                  transition: opacity 0.3s;
+                }
+                video:hover::-webkit-media-controls {
+                  opacity: 1;
                 }
                 video::-webkit-media-controls-panel {
-                  padding: 0 1rem;
+                  padding: 0.5rem 1rem;
                 }
-                video::-webkit-media-controls-fullscreen-button {
-                  background-color: transparent;
-                  border: none;
+                video::-webkit-media-controls-play-button,
+                video::-webkit-media-controls-fullscreen-button,
+                video::-webkit-media-controls-mute-button,
+                video::-webkit-media-controls-timeline,
+                video::-webkit-media-controls-volume-slider,
+                video::-webkit-media-controls-current-time-display,
+                video::-webkit-media-controls-time-remaining-display {
+                  opacity: 1;
                   cursor: pointer;
-                  padding: 0.5rem;
-                  margin: 0 0.5rem;
-                  border-radius: 0.25rem;
-                  transition: background-color 0.2s;
                 }
-                video::-webkit-media-controls-fullscreen-button:hover {
-                  background-color: rgba(255, 255, 255, 0.1);
+                video::-webkit-media-controls-play-button:hover,
+                video::-webkit-media-controls-fullscreen-button:hover,
+                video::-webkit-media-controls-mute-button:hover {
+                  opacity: 0.8;
                 }
-                video::-webkit-media-controls-fullscreen-button:active {
+                video::-webkit-media-controls-timeline {
+                  height: 4px;
                   background-color: rgba(255, 255, 255, 0.2);
+                  border-radius: 2px;
+                }
+                video::-webkit-media-controls-timeline:hover {
+                  height: 6px;
+                }
+                video::-webkit-media-controls-volume-slider {
+                  height: 4px;
+                  background-color: rgba(255, 255, 255, 0.2);
+                  border-radius: 2px;
                 }
                 video:fullscreen {
                   background-color: black;
