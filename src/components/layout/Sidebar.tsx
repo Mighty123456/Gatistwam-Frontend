@@ -66,9 +66,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                       Contact Information
                     </h3>
                     <div className="space-y-2 text-gray-600 dark:text-gray-400">
-                      <p>Email: thegatistwam@gmail.com</p>
+                      <p>Email: gatistwamgroup@gmail.com</p>
                       <p>Phone: +91 9274524365</p>
-                      <p>Address: Shrimat Arcade, 01, Anand - Sojitra Rd, Nand Tanuj Society, Karamsad, Anand, Gujarat 388121</p>
+                      <p>Address: 204, Second Floor, Shrimat Arcade, Opposite Sahjanand Eleganace 3, Anand Sojitra Road, At Karamsad, Anand-Gujarat (India), Pincode: 388325</p>
                     </div>
                   </div>
 

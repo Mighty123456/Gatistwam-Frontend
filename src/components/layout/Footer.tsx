@@ -100,9 +100,7 @@ const Footer: React.FC = () => {
               <li className="flex items-start">
                 <MapPin size={20} className={`mt-1 mr-3 flex-shrink-0 ${theme === 'light' ? 'text-primary-500' : 'text-secondary-500'}`} />
                 <span className={theme === 'light' ? 'text-gray-600' : 'text-gray-400'}>
-                  Shrimat Arcade, 01, Anand - Sojitra Rd,<br />
-                  Nand Tanuj Society, Karamsad,<br />
-                  Anand, Gujarat 388121
+                  204, Second Floor, Shrimat Arcade, Opposite Sahjanand Eleganace 3, Anand Sojitra Road, At Karamsad, Anand-Gujarat (India), Pincode: 388325
                 </span>
               </li>
               <li className="flex items-center">
@@ -111,7 +109,7 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-center">
                 <Mail size={20} className={`mr-3 flex-shrink-0 ${theme === 'light' ? 'text-primary-500' : 'text-secondary-500'}`} />
-                <a href="mailto:advertmarketing1988@gmail.com" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}>advertmarketing1988@gmail.com</a>
+                <a href="mailto:gatistwamgroup@gmail.com" className={theme === 'light' ? 'text-gray-600 hover:text-secondary-500 transition-colors' : 'text-gray-400 hover:text-secondary-500 transition-colors'}>gatistwamgroup@gmail.com</a>
               </li>
             </ul>
             {/* Newsletter Section */}
